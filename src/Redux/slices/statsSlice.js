@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../api/client.js';
+import api, { agentApi } from '../../api/client.js';
 
 export function mapAPIToUI(stats) {
   return {
@@ -52,6 +52,18 @@ export const fetchAllWardsStats = createAsyncThunk(
   }
 );
 
+export const fetchCommissionerBrief = createAsyncThunk(
+  'stats/fetchCommissionerBrief',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await agentApi.get('/api/brief');
+      return data.ai_brief;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.detail || err.message);
+    }
+  }
+);
+
 const statsSlice = createSlice({
   name: 'stats',
   initialState: {
@@ -60,6 +72,8 @@ const statsSlice = createSlice({
     aiBreif: null,
     status: 'idle',
     allWardsStatus: 'idle',
+    briefStatus: 'idle',
+    briefError: null,
     error: null,
   },
   reducers: {
@@ -88,6 +102,18 @@ const statsSlice = createSlice({
       .addCase(fetchAllWardsStats.rejected, (state, action) => {
         state.allWardsStatus = 'failed';
         state.error = action.payload;
+      })
+      .addCase(fetchCommissionerBrief.pending, (state) => {
+        state.briefStatus = 'loading';
+        state.briefError = null;
+      })
+      .addCase(fetchCommissionerBrief.fulfilled, (state, action) => {
+        state.briefStatus = 'succeeded';
+        state.aiBreif = action.payload;
+      })
+      .addCase(fetchCommissionerBrief.rejected, (state, action) => {
+        state.briefStatus = 'failed';
+        state.briefError = action.payload;
       });
   },
 });
@@ -99,6 +125,8 @@ export const selectAllWardsStats = (state) => state.stats.allWardsStats;
 export const selectStatsStatus = (state) => state.stats.status;
 export const selectAllWardsStatus = (state) => state.stats.allWardsStatus;
 export const selectAiBrief = (state) => state.stats.aiBreif;
+export const selectBriefStatus = (state) => state.stats.briefStatus;
+export const selectBriefError = (state) => state.stats.briefError;
 export const selectStatsError = (state) => state.stats.error;
 
 export default statsSlice.reducer;

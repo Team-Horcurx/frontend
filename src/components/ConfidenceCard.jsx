@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import {
   selectSelectedProperty,
-  selectFetchOneStatus,
+  selectExplanationStatus,
+  selectExplanationError,
 } from '../Redux/slices/propertiesSlice.js';
 import Loader from './Loader.jsx';
 import './ConfidenceCard.css';
@@ -24,7 +25,8 @@ function signalColor(value) {
 
 export default function ConfidenceCard() {
   const property = useSelector(selectSelectedProperty);
-  const fetchOneStatus = useSelector(selectFetchOneStatus);
+  const explanationStatus = useSelector(selectExplanationStatus);
+  const explanationError = useSelector(selectExplanationError);
 
   if (!property) return null;
 
@@ -84,13 +86,18 @@ export default function ConfidenceCard() {
         })}
       </div>
 
-      {fetchOneStatus === 'loading' && (
+      {explanationStatus === 'loading' && (
         <div className="confidence-card__ai-loading">
           <Loader size="sm" label="Loading AI explanation" />
           <span>Loading AI explanation…</span>
         </div>
       )}
-      {property.aiExplanation && (
+      {explanationStatus === 'failed' && (
+        <div className="confidence-card__ai-error">
+          {explanationError || 'AI explanation unavailable.'}
+        </div>
+      )}
+      {explanationStatus !== 'loading' && property.aiExplanation && (
         <div className="confidence-card__ai-text">
           <div className="confidence-card__ai-label">AI Analysis</div>
           <div className="confidence-card__ai-markdown">

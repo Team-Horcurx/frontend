@@ -6,8 +6,9 @@ import {
   selectPropertiesStatus,
   selectSelectedProperty,
   setSelectedProperty,
+  fetchPropertyById,
+  fetchPropertyExplanation,
 } from '../Redux/slices/propertiesSlice.js';
-import { fetchPropertyById } from '../Redux/slices/propertiesSlice.js';
 import EmptyState from './EmptyState.jsx';
 import './PropertyList.css';
 
@@ -40,6 +41,7 @@ export default function PropertyList() {
   function handleRowClick(property) {
     dispatch(setSelectedProperty(property.id));
     dispatch(fetchPropertyById(property.id));
+    dispatch(fetchPropertyExplanation(property.id));
   }
 
   return (

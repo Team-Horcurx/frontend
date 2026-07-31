@@ -4,9 +4,12 @@ import ReactMarkdown from 'react-markdown';
 import { FiBarChart2 } from 'react-icons/fi';
 import {
   fetchAllWardsStats,
+  fetchCommissionerBrief,
   selectAllWardsStats,
   selectAllWardsStatus,
   selectAiBrief,
+  selectBriefStatus,
+  selectBriefError,
 } from '../Redux/slices/statsSlice.js';
 import MapView from '../components/MapView.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -18,10 +21,13 @@ export default function CommissionerView() {
   const allWardsStats = useSelector(selectAllWardsStats);
   const allWardsStatus = useSelector(selectAllWardsStatus);
   const aiBrief = useSelector(selectAiBrief);
+  const briefStatus = useSelector(selectBriefStatus);
+  const briefError = useSelector(selectBriefError);
 
   useEffect(() => {
     if (allWardsStatus === 'idle') dispatch(fetchAllWardsStats());
-  }, [allWardsStatus, dispatch]);
+    if (briefStatus === 'idle') dispatch(fetchCommissionerBrief());
+  }, [allWardsStatus, briefStatus, dispatch]);
 
   const top10 = allWardsStats
     ? [...allWardsStats].sort((a, b) => b.unassessedCount - a.unassessedCount).slice(0, 10)
@@ -97,19 +103,23 @@ export default function CommissionerView() {
 
           <div className="commissioner-view__brief">
             <h2 className="commissioner-view__section-title">AI Daily Brief</h2>
-            {allWardsStatus === 'loading' ? (
+            {briefStatus === 'loading' ? (
               <div className="commissioner-view__brief-skeleton" aria-hidden="true">
                 <span className="skeleton-bar commissioner-view__skeleton-line" />
                 <span className="skeleton-bar commissioner-view__skeleton-line" />
                 <span className="skeleton-bar commissioner-view__skeleton-line commissioner-view__skeleton-line--short" />
               </div>
+            ) : briefStatus === 'failed' ? (
+              <p className="commissioner-view__brief-placeholder">
+                {briefError || 'AI brief unavailable. Try refreshing.'}
+              </p>
             ) : aiBrief ? (
               <div className="commissioner-view__brief-markdown">
                 <ReactMarkdown>{aiBrief}</ReactMarkdown>
               </div>
             ) : (
               <p className="commissioner-view__brief-placeholder">
-                Phase 3 will render the AI-generated daily brief here using Bedrock Llama 4 Scout.
+                AI brief will appear here once the pipeline has run.
               </p>
             )}
           </div>

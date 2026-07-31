@@ -108,6 +108,51 @@ export const handlers = [
     return HttpResponse.json({ response: CHAT_RESPONSES[idx] });
   }),
 
+  // propertiesSlice.fetchPropertyExplanation — Spot 1
+  http.get(`${BASE}/api/explain/:propertyId`, async ({ params }) => {
+    await delay(700);
+    return HttpResponse.json({
+      property_id: params.propertyId,
+      ai_explanation:
+        `**Analysis**: NDBI delta of 0.21 confirms significant built-up area increase since 2022 baseline. ` +
+        `No matching structure found in GVMC property records — high likelihood of unregistered construction.\n\n` +
+        `**Estimated annual tax**: ₹18,000–₹26,000 based on area and usage classification. ` +
+        `Recommend priority field verification within 7 days.`,
+    });
+  }),
+
+  // statsSlice.fetchCommissionerBrief — Spot 2
+  http.get(`${BASE}/api/brief`, async () => {
+    await delay(800);
+    return HttpResponse.json({
+      ai_brief:
+        `**City Summary**: GVMC detected 1,847 new properties across 98 wards this cycle, with an estimated ` +
+        `revenue leakage of ₹8.3 crore/year. New builds account for 68% of detections; change-of-use for 32%.\n\n` +
+        `**Top Wards**: Ward 14 (Asilmetta) leads with 94 unassessed properties at 89% avg confidence. ` +
+        `Ward 22 (Steel Plant area) shows a 340% spike vs baseline — immediate attention required. ` +
+        `Ward 7 (Kommadi) has the highest revenue leakage estimate at ₹1.2 crore.\n\n` +
+        `**Recommendation**: Deploy 4 additional field officers to Wards 14, 22, and 7 for the next 2 weeks. ` +
+        `Priority verification of 203 HIGH-severity properties before the Q3 assessment deadline.`,
+    });
+  }),
+
+  // alertsSlice.generateWardAlert — Spot 3
+  http.post(`${BASE}/api/wards/:wardId/alert`, async ({ params }) => {
+    await delay(600);
+    const severities = ['HIGH', 'MEDIUM', 'LOW'];
+    const severity = severities[Number(params.wardId) % 3];
+    return HttpResponse.json({
+      alert_id: `mock-alert-${params.wardId}-${Date.now()}`,
+      alert: {
+        text: `Ward ${params.wardId} shows a 220% spike in new-build detections above monthly baseline. ` +
+          `Recommend deploying field officers for verification within 48 hours.`,
+        severity,
+        score: severity === 'HIGH' ? 82 : severity === 'MEDIUM' ? 55 : 28,
+      },
+      saved: true,
+    });
+  }),
+
   // adminSlice.uploadCSV
   http.post(`${BASE}/api/admin/upload-csv`, async () => {
     await delay(1200);

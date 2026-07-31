@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../api/client.js';
+import api, { agentApi } from '../../api/client.js';
 
 export function mapAPIToUI(prop) {
   return {
@@ -55,6 +55,18 @@ export const fetchPropertyById = createAsyncThunk(
   }
 );
 
+export const fetchPropertyExplanation = createAsyncThunk(
+  'properties/fetchExplanation',
+  async (propertyId, { rejectWithValue }) => {
+    try {
+      const { data } = await agentApi.get(`/api/explain/${propertyId}`);
+      return { propertyId, explanation: data.ai_explanation };
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.detail || err.message);
+    }
+  }
+);
+
 export const verifyProperty = createAsyncThunk(
   'properties/verify',
   async ({ id, status, notes, updatedBy }, { rejectWithValue }) => {
@@ -78,6 +90,8 @@ const propertiesSlice = createSlice({
     selectedItem: null,
     status: 'idle',
     fetchOneStatus: 'idle',
+    explanationStatus: 'idle',
+    explanationError: null,
     error: null,
     verifyStatus: 'idle',
     verifyError: null,
@@ -87,6 +101,8 @@ const propertiesSlice = createSlice({
       const id = action.payload;
       state.selectedItem = state.items.find((p) => p.id === id) ?? null;
       state.fetchOneStatus = 'idle';
+      state.explanationStatus = 'idle';
+      state.explanationError = null;
       state.verifyStatus = 'idle';
       state.verifyError = null;
     },
@@ -128,6 +144,21 @@ const propertiesSlice = createSlice({
         state.fetchOneStatus = 'failed';
         state.error = action.payload;
       })
+      .addCase(fetchPropertyExplanation.pending, (state) => {
+        state.explanationStatus = 'loading';
+        state.explanationError = null;
+        if (state.selectedItem) state.selectedItem.aiExplanation = null;
+      })
+      .addCase(fetchPropertyExplanation.fulfilled, (state, action) => {
+        state.explanationStatus = 'succeeded';
+        if (state.selectedItem?.id === action.payload.propertyId) {
+          state.selectedItem.aiExplanation = action.payload.explanation;
+        }
+      })
+      .addCase(fetchPropertyExplanation.rejected, (state, action) => {
+        state.explanationStatus = 'failed';
+        state.explanationError = action.payload;
+      })
       .addCase(verifyProperty.pending, (state) => { state.verifyStatus = 'loading'; })
       .addCase(verifyProperty.fulfilled, (state, action) => {
         state.verifyStatus = 'succeeded';
@@ -154,6 +185,8 @@ export const selectProperties = (state) => state.properties.items;
 export const selectSelectedProperty = (state) => state.properties.selectedItem;
 export const selectPropertiesStatus = (state) => state.properties.status;
 export const selectFetchOneStatus = (state) => state.properties.fetchOneStatus;
+export const selectExplanationStatus = (state) => state.properties.explanationStatus;
+export const selectExplanationError = (state) => state.properties.explanationError;
 export const selectVerifyStatus = (state) => state.properties.verifyStatus;
 export const selectVerifyError = (state) => state.properties.verifyError;
 export const selectPropertiesError = (state) => state.properties.error;
