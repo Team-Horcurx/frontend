@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import WardSelector from '../components/WardSelector.jsx';
@@ -9,6 +9,10 @@ import ConfidenceCard from '../components/ConfidenceCard.jsx';
 import VerifyPanel from '../components/VerifyPanel.jsx';
 import ChatPanel from '../components/ChatPanel.jsx';
 import PageMotion from '../components/PageMotion.jsx';
+import ComparisonControls from '../components/ComparisonControls.jsx';
+import ComparisonTable from '../components/ComparisonTable.jsx';
+import OfficerAssessmentForm from '../components/OfficerAssessmentForm.jsx';
+import { COMPARISON_YEARS } from '../mockData/comparisonData.js';
 import { selectSelectedProperty, selectPropertiesError } from '../Redux/slices/propertiesSlice.js';
 import { selectWardsError } from '../Redux/slices/wardsSlice.js';
 import './FieldOfficerView.css';
@@ -18,6 +22,23 @@ export default function FieldOfficerView() {
   const propertiesError = useSelector(selectPropertiesError);
   const wardsError = useSelector(selectWardsError);
   const error = propertiesError || wardsError;
+
+  const [baseYear, setBaseYear] = useState(COMPARISON_YEARS[0]);
+  const [compareYear, setCompareYear] = useState(COMPARISON_YEARS[1]);
+
+  function handleBaseYearChange(year) {
+    setBaseYear(year);
+    if (compareYear <= year) {
+      setCompareYear(COMPARISON_YEARS.find((y) => y > year) ?? year);
+    }
+  }
+
+  function handleCompareYearChange(year) {
+    setCompareYear(year);
+    if (year <= baseYear) {
+      setBaseYear([...COMPARISON_YEARS].reverse().find((y) => y < year) ?? year);
+    }
+  }
 
   return (
     <PageMotion className="officer-view">
@@ -37,6 +58,13 @@ export default function FieldOfficerView() {
             </div>
           )}
           <StatsBar />
+          <ComparisonControls
+            baseYear={baseYear}
+            compareYear={compareYear}
+            onBaseYearChange={handleBaseYearChange}
+            onCompareYearChange={handleCompareYearChange}
+          />
+          <OfficerAssessmentForm baseYear={baseYear} compareYear={compareYear} />
         </div>
 
         <div className="officer-view__panel glass-panel">
@@ -56,6 +84,7 @@ export default function FieldOfficerView() {
               </motion.div>
             )}
           </AnimatePresence>
+          <ComparisonTable />
         </div>
       </div>
 
