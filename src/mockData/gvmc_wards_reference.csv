@@ -1,0 +1,99 @@
+ward_id,ward_name,zone,pincode,bbox_north,bbox_south,bbox_east,bbox_west,property_count
+1,"Bheemunipatnam",Bheemunipatnam,530001,17.895,17.78,83.46,83.37,60
+2,"Madhurawada",Madhurawada,530009,17.82,17.76,83.38,83.3,64
+3,"Asilmetta",Asilmetta,530017,17.745,17.7,83.33,83.29,37
+4,"Suryabagh",Suryabagh,530020,17.715,17.685,83.31,83.28,43
+5,"Gnanapuram",Gnanapuram,530030,17.7,17.66,83.29,83.24,39
+6,"Gajuwaka",Gajuwaka,530035,17.68,17.64,83.24,83.19,36
+7,"Anakapalli",Anakapalli,530040,17.65,17.58,83.1,83,36
+8,"Vepagunta",Vepagunta,530043,17.775,17.74,83.28,83.23,53
+9,"Sagar Nagar",Bheemunipatnam,530006,17.895,17.78,83.46,83.37,39
+10,"Pendurthi",Madhurawada,530008,17.82,17.76,83.38,83.3,52
+11,"Dwaraka Nagar",Asilmetta,530014,17.745,17.7,83.33,83.29,63
+12,"Jagadamba Junction",Suryabagh,530024,17.715,17.685,83.31,83.28,39
+13,"NAD Junction",Gnanapuram,530030,17.7,17.66,83.29,83.24,43
+14,"Kurmannapalem",Gajuwaka,530032,17.68,17.64,83.24,83.19,59
+15,"Sabbavaram",Anakapalli,530040,17.65,17.58,83.1,83,35
+16,"Simhachalam",Vepagunta,530044,17.775,17.74,83.28,83.23,57
+17,"Rushikonda",Bheemunipatnam,530004,17.895,17.78,83.46,83.37,54
+18,"Marikavalasa",Madhurawada,530007,17.82,17.76,83.38,83.3,52
+19,"Siripuram",Asilmetta,530013,17.745,17.7,83.33,83.29,64
+20,"One Town",Suryabagh,530024,17.715,17.685,83.31,83.28,53
+21,"Malkapuram",Gnanapuram,530030,17.7,17.66,83.29,83.24,55
+22,"Autonagar",Gajuwaka,530035,17.68,17.64,83.24,83.19,35
+23,"Butchayyapeta",Anakapalli,530040,17.65,17.58,83.1,83,42
+24,"Adavivaram",Vepagunta,530046,17.775,17.74,83.28,83.23,64
+25,"Anandapuram",Bheemunipatnam,530005,17.895,17.78,83.46,83.37,41
+26,"Sujatha Nagar",Madhurawada,530008,17.82,17.76,83.38,83.3,51
+27,"MVP Colony",Asilmetta,530013,17.745,17.7,83.33,83.29,39
+28,"Poorna Market",Suryabagh,530024,17.715,17.685,83.31,83.28,37
+29,"Kancharapalem",Gnanapuram,530027,17.7,17.66,83.29,83.24,50
+30,"BHPV Colony",Gajuwaka,530035,17.68,17.64,83.24,83.19,54
+31,"Kasimkota",Anakapalli,530039,17.65,17.58,83.1,83,54
+32,"Vepagunta Colony",Vepagunta,530046,17.775,17.74,83.28,83.23,37
+33,"Padmanabham",Bheemunipatnam,530002,17.895,17.78,83.46,83.37,57
+34,"Kommadi",Madhurawada,530012,17.82,17.76,83.38,83.3,50
+35,"Seethammadhara",Asilmetta,530016,17.745,17.7,83.33,83.29,39
+36,"Kotha Road",Suryabagh,530024,17.715,17.685,83.31,83.28,54
+37,"Marripalem",Gnanapuram,530026,17.7,17.66,83.29,83.24,48
+38,"Aganampudi",Gajuwaka,530031,17.68,17.64,83.24,83.19,63
+39,"Yeleswaram",Anakapalli,530040,17.65,17.58,83.1,83,52
+40,"Vepagunta (Ward 40)",Vepagunta,530046,17.775,17.74,83.28,83.23,59
+41,"Kapuluppada",Bheemunipatnam,530006,17.895,17.78,83.46,83.37,51
+42,"PM Palem",Madhurawada,530007,17.82,17.76,83.38,83.3,63
+43,"Maddilapalem",Asilmetta,530015,17.745,17.7,83.33,83.29,36
+44,"Old Town",Suryabagh,530022,17.715,17.685,83.31,83.28,45
+45,"Gopalapatnam",Gnanapuram,530028,17.7,17.66,83.29,83.24,52
+46,"Naidupalem",Gajuwaka,530035,17.68,17.64,83.24,83.19,63
+47,"Anakapalli (Ward 47)",Anakapalli,530037,17.65,17.58,83.1,83,54
+48,"Simhachalam (Ward 48)",Vepagunta,530046,17.775,17.74,83.28,83.23,47
+49,"Bheemunipatnam (Ward 49)",Bheemunipatnam,530003,17.895,17.78,83.46,83.37,56
+50,"Yendada",Madhurawada,530009,17.82,17.76,83.38,83.3,55
+51,"Chinna Waltair",Asilmetta,530016,17.745,17.7,83.33,83.29,58
+52,"Suryabagh (Ward 52)",Suryabagh,530023,17.715,17.685,83.31,83.28,45
+53,"Pedagantyada",Gnanapuram,530029,17.7,17.66,83.29,83.24,45
+54,"New Gajuwaka",Gajuwaka,530032,17.68,17.64,83.24,83.19,60
+55,"Sabbavaram (Ward 55)",Anakapalli,530042,17.65,17.58,83.1,83,38
+56,"Adavivaram (Ward 56)",Vepagunta,530047,17.775,17.74,83.28,83.23,63
+57,"Sagar Nagar (Ward 57)",Bheemunipatnam,530003,17.895,17.78,83.46,83.37,50
+58,"Madhurawada (Ward 58)",Madhurawada,530010,17.82,17.76,83.38,83.3,55
+59,"Daba Gardens",Asilmetta,530018,17.745,17.7,83.33,83.29,61
+60,"Jagadamba Junction (Ward 60)",Suryabagh,530021,17.715,17.685,83.31,83.28,45
+61,"Gnanapuram (Ward 61)",Gnanapuram,530025,17.7,17.66,83.29,83.24,52
+62,"Gajuwaka (Ward 62)",Gajuwaka,530036,17.68,17.64,83.24,83.19,50
+63,"Butchayyapeta (Ward 63)",Anakapalli,530040,17.65,17.58,83.1,83,40
+64,"Vepagunta Colony (Ward 64)",Vepagunta,530043,17.775,17.74,83.28,83.23,63
+65,"Rushikonda (Ward 65)",Bheemunipatnam,530005,17.895,17.78,83.46,83.37,52
+66,"Pendurthi (Ward 66)",Madhurawada,530009,17.82,17.76,83.38,83.3,42
+67,"Asilmetta (Ward 67)",Asilmetta,530018,17.745,17.7,83.33,83.29,46
+68,"One Town (Ward 68)",Suryabagh,530022,17.715,17.685,83.31,83.28,57
+69,"NAD Junction (Ward 69)",Gnanapuram,530026,17.7,17.66,83.29,83.24,47
+70,"Kurmannapalem (Ward 70)",Gajuwaka,530035,17.68,17.64,83.24,83.19,57
+71,"Kasimkota (Ward 71)",Anakapalli,530039,17.65,17.58,83.1,83,57
+72,"Vepagunta (Ward 72)",Vepagunta,530044,17.775,17.74,83.28,83.23,52
+73,"Anandapuram (Ward 73)",Bheemunipatnam,530004,17.895,17.78,83.46,83.37,60
+74,"Marikavalasa (Ward 74)",Madhurawada,530009,17.82,17.76,83.38,83.3,50
+75,"Dwaraka Nagar (Ward 75)",Asilmetta,530014,17.745,17.7,83.33,83.29,38
+76,"Poorna Market (Ward 76)",Suryabagh,530022,17.715,17.685,83.31,83.28,50
+77,"Malkapuram (Ward 77)",Gnanapuram,530026,17.7,17.66,83.29,83.24,42
+78,"Autonagar (Ward 78)",Gajuwaka,530031,17.68,17.64,83.24,83.19,53
+79,"Yeleswaram (Ward 79)",Anakapalli,530037,17.65,17.58,83.1,83,37
+80,"Simhachalam (Ward 80)",Vepagunta,530043,17.775,17.74,83.28,83.23,55
+81,"Padmanabham (Ward 81)",Bheemunipatnam,530006,17.895,17.78,83.46,83.37,56
+82,"Sujatha Nagar (Ward 82)",Madhurawada,530011,17.82,17.76,83.38,83.3,64
+83,"Siripuram (Ward 83)",Asilmetta,530014,17.745,17.7,83.33,83.29,53
+84,"Kotha Road (Ward 84)",Suryabagh,530020,17.715,17.685,83.31,83.28,46
+85,"Kancharapalem (Ward 85)",Gnanapuram,530028,17.7,17.66,83.29,83.24,41
+86,"BHPV Colony (Ward 86)",Gajuwaka,530033,17.68,17.64,83.24,83.19,37
+87,"Anakapalli (Ward 87)",Anakapalli,530039,17.65,17.58,83.1,83,45
+88,"Adavivaram (Ward 88)",Vepagunta,530048,17.775,17.74,83.28,83.23,64
+89,"Kapuluppada (Ward 89)",Bheemunipatnam,530004,17.895,17.78,83.46,83.37,51
+90,"Kommadi (Ward 90)",Madhurawada,530010,17.82,17.76,83.38,83.3,61
+91,"MVP Colony (Ward 91)",Asilmetta,530016,17.745,17.7,83.33,83.29,63
+92,"Old Town (Ward 92)",Suryabagh,530020,17.715,17.685,83.31,83.28,60
+93,"Marripalem (Ward 93)",Gnanapuram,530028,17.7,17.66,83.29,83.24,36
+94,"Aganampudi (Ward 94)",Gajuwaka,530035,17.68,17.64,83.24,83.19,42
+95,"Sabbavaram (Ward 95)",Anakapalli,530040,17.65,17.58,83.1,83,42
+96,"Vepagunta Colony (Ward 96)",Vepagunta,530044,17.775,17.74,83.28,83.23,56
+97,"Bheemunipatnam (Ward 97)",Bheemunipatnam,530006,17.895,17.78,83.46,83.37,46
+98,"PM Palem (Ward 98)",Madhurawada,530011,17.82,17.76,83.38,83.3,53
