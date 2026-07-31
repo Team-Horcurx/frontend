@@ -12,6 +12,7 @@ const COMPARISON_STATS_BY_RANGE = {
     changeOfUse: 9,
     builtUpAreaIncreaseSqm: 6840,
     estimatedAssessableAreaSqm: 4920,
+    avgNdbiChange: 0.15,
     estimatedTaxImpactInr: 612000,
   },
   '2022-2026': {
@@ -19,6 +20,7 @@ const COMPARISON_STATS_BY_RANGE = {
     changeOfUse: 18,
     builtUpAreaIncreaseSqm: 12480,
     estimatedAssessableAreaSqm: 8960,
+    avgNdbiChange: 0.24,
     estimatedTaxImpactInr: 1284000,
   },
   '2024-2026': {
@@ -26,6 +28,7 @@ const COMPARISON_STATS_BY_RANGE = {
     changeOfUse: 11,
     builtUpAreaIncreaseSqm: 5640,
     estimatedAssessableAreaSqm: 4040,
+    avgNdbiChange: 0.13,
     estimatedTaxImpactInr: 672000,
   },
 };

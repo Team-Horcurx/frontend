@@ -34,7 +34,7 @@
 }
 
 .officer-view__toolbar {
-  flex: 1 1 0;
+  flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
   display: flex;
@@ -44,8 +44,24 @@
   background: transparent;
   border: none;
   border-radius: 0;
-  border-bottom: 1px solid var(--border-color-light);
   box-shadow: none;
+}
+
+.officer-view__toolbar .property-list {
+  flex: 0 0 auto;
+  height: 260px;
+  min-width: 0;
+  background: transparent;
+  border: none;
+}
+
+.officer-view__toolbar .property-list__filters {
+  padding: var(--space-2);
+}
+
+.officer-view__toolbar .property-list__th,
+.officer-view__toolbar .property-list__td {
+  padding: var(--space-2);
 }
 
 .officer-view__toolbar .stats-bar {
@@ -60,6 +76,22 @@
 .officer-view__toolbar .stats-bar__value {
   font-size: var(--font-lg);
   margin-bottom: 2px;
+}
+
+.officer-view__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border-color-light);
+}
+
+.officer-view__section-heading {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
 }
 
 .officer-view__topbar {
@@ -79,37 +111,6 @@
 
 .officer-view__error {
   margin: 0;
-}
-
-.officer-view__panel {
-  flex: 1 1 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-2);
-  overflow-y: auto;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.officer-view__panel .property-list {
-  flex: 0 0 auto;
-  height: 260px;
-  min-width: 0;
-  background: transparent;
-  border: none;
-}
-
-.officer-view__panel .property-list__filters {
-  padding: var(--space-2);
-}
-
-.officer-view__panel .property-list__th,
-.officer-view__panel .property-list__td {
-  padding: var(--space-2);
 }
 
 .officer-view__detail {
@@ -160,8 +161,7 @@
     box-shadow: none;
   }
 
-  .officer-view__toolbar,
-  .officer-view__panel {
+  .officer-view__toolbar {
     max-width: none;
     width: 100%;
     background: var(--glass-bg);
@@ -170,9 +170,6 @@
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-float);
-  }
-
-  .officer-view__toolbar {
     flex: 0 0 auto;
     overflow-y: visible;
     padding: var(--space-4);
@@ -193,18 +190,12 @@
     margin-bottom: var(--space-2);
   }
 
-  .officer-view__panel {
-    height: clamp(360px, 60vh, 520px);
-    padding: var(--space-3);
-    gap: var(--space-3);
-  }
-
-  .officer-view__panel .property-list__filters {
+  .officer-view__toolbar .property-list__filters {
     padding: var(--space-3);
   }
 
-  .officer-view__panel .property-list__th,
-  .officer-view__panel .property-list__td {
+  .officer-view__toolbar .property-list__th,
+  .officer-view__toolbar .property-list__td {
     padding: var(--space-3);
   }
 

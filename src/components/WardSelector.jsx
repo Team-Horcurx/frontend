@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FiChevronDown } from 'react-icons/fi';
 import {
   fetchWards,
   fetchWardGeoJSON,
@@ -36,23 +37,26 @@ export default function WardSelector() {
       <label className="ward-selector__label" htmlFor="ward-select">
         Ward
       </label>
-      <select
-        id="ward-select"
-        className="ward-selector__select"
-        value={selectedWardId || ''}
-        onChange={handleChange}
-        disabled={status === 'loading'}
-      >
-        <option value="">
-          {status === 'loading' ? 'Loading wards…' : '— Select a ward —'}
-        </option>
-        {wards.map((w) => (
-          <option key={w.id} value={w.id}>
-            Ward {w.id} — {w.name}
-            {w.detectionCount > 0 ? ` (${w.detectionCount} detections)` : ''}
+      <div className="ward-selector__select-wrap">
+        <select
+          id="ward-select"
+          className="ward-selector__select"
+          value={selectedWardId || ''}
+          onChange={handleChange}
+          disabled={status === 'loading'}
+        >
+          <option value="">
+            {status === 'loading' ? 'Loading wards…' : '— Select a ward —'}
           </option>
-        ))}
-      </select>
+          {wards.map((w) => (
+            <option key={w.id} value={w.id}>
+              Ward {w.id} — {w.name}
+              {w.detectionCount > 0 ? ` (${w.detectionCount} detections)` : ''}
+            </option>
+          ))}
+        </select>
+        <FiChevronDown className="ward-selector__chevron" aria-hidden="true" />
+      </div>
     </div>
   );
 }
