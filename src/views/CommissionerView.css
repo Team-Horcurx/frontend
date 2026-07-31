@@ -1,33 +1,42 @@
 .commissioner-view {
-  position: relative;
+  display: flex;
+  align-items: stretch;
   height: calc(100vh - var(--nav-offset));
   overflow: hidden;
+  gap: var(--space-4);
+  padding: var(--space-4);
 }
 
 .commissioner-view__map {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
 }
 
 .commissioner-view__overlay {
-  position: absolute;
-  inset: var(--space-4);
-  z-index: 5;
-  display: grid;
-  grid-template-columns: 1fr clamp(320px, 30vw, 420px);
-  grid-template-rows: auto 1fr;
-  gap: var(--space-4);
-  pointer-events: none;
+  position: relative;
+  flex: 0 0 clamp(380px, 30vw, 450px);
+  width: clamp(380px, 30vw, 450px);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-float);
 }
 
 .commissioner-view__toolbar {
-  grid-column: 1;
-  grid-row: 1;
-  pointer-events: auto;
-  display: flex;
+  display: none;
+  flex-shrink: 0;
   align-items: center;
   padding: var(--space-4);
-  max-width: 480px;
 }
 
 .commissioner-view__title {
@@ -38,15 +47,17 @@
 }
 
 .commissioner-view__panel {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  pointer-events: auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-3);
   overflow-y: auto;
   min-height: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .commissioner-view__top10,
@@ -172,9 +183,12 @@
 
 @media (max-width: 1024px) {
   .commissioner-view {
+    display: block;
     position: static;
     height: auto;
     overflow: visible;
+    gap: 0;
+    padding: 0;
   }
 
   .commissioner-view__map {
@@ -191,9 +205,30 @@
     inset: auto;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    flex-basis: auto;
     gap: var(--space-4);
     padding: var(--space-4) var(--page-padding-x);
     pointer-events: auto;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .commissioner-view__toolbar {
+    display: flex;
+  }
+
+  .commissioner-view__panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-float);
   }
 
   .commissioner-view__toolbar,
