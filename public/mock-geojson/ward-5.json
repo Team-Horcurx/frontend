@@ -1,0 +1,153 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w5-001",
+        "detection_type": "new_build",
+        "confidence": 0.84,
+        "area_sqm": 398,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.204906,
+              17.68191
+            ],
+            [
+              83.205094,
+              17.68191
+            ],
+            [
+              83.205094,
+              17.68209
+            ],
+            [
+              83.204906,
+              17.68209
+            ],
+            [
+              83.204906,
+              17.68191
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w5-002",
+        "detection_type": "change_of_use",
+        "confidence": 0.69,
+        "area_sqm": 234,
+        "status": "verified"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.210928,
+              17.675931
+            ],
+            [
+              83.211072,
+              17.675931
+            ],
+            [
+              83.211072,
+              17.676069
+            ],
+            [
+              83.210928,
+              17.676069
+            ],
+            [
+              83.210928,
+              17.675931
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w5-003",
+        "detection_type": "new_build",
+        "confidence": 0.77,
+        "area_sqm": 312,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.196916,
+              17.68892
+            ],
+            [
+              83.197084,
+              17.68892
+            ],
+            [
+              83.197084,
+              17.68908
+            ],
+            [
+              83.196916,
+              17.68908
+            ],
+            [
+              83.196916,
+              17.68892
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w5-004",
+        "detection_type": "change_of_use",
+        "confidence": 0.91,
+        "area_sqm": 589,
+        "status": "underassessed"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.202885,
+              17.672891
+            ],
+            [
+              83.203115,
+              17.672891
+            ],
+            [
+              83.203115,
+              17.673109
+            ],
+            [
+              83.202885,
+              17.673109
+            ],
+            [
+              83.202885,
+              17.672891
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

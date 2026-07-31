@@ -1,0 +1,301 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w1-001",
+        "detection_type": "new_build",
+        "confidence": 0.92,
+        "area_sqm": 312,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.294916,
+              17.72992
+            ],
+            [
+              83.295084,
+              17.72992
+            ],
+            [
+              83.295084,
+              17.73008
+            ],
+            [
+              83.294916,
+              17.73008
+            ],
+            [
+              83.294916,
+              17.72992
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w1-002",
+        "detection_type": "change_of_use",
+        "confidence": 0.74,
+        "area_sqm": 188,
+        "status": "verified"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.300935,
+              17.721938
+            ],
+            [
+              83.301065,
+              17.721938
+            ],
+            [
+              83.301065,
+              17.722062
+            ],
+            [
+              83.300935,
+              17.722062
+            ],
+            [
+              83.300935,
+              17.721938
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w1-003",
+        "detection_type": "new_build",
+        "confidence": 0.87,
+        "area_sqm": 445,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.3079,
+              17.734905
+            ],
+            [
+              83.3081,
+              17.734905
+            ],
+            [
+              83.3081,
+              17.735095
+            ],
+            [
+              83.3079,
+              17.735095
+            ],
+            [
+              83.3079,
+              17.734905
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w1-004",
+        "detection_type": "new_build",
+        "confidence": 0.61,
+        "area_sqm": 220,
+        "status": "false_positive"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.28493,
+              17.717933
+            ],
+            [
+              83.28507,
+              17.717933
+            ],
+            [
+              83.28507,
+              17.718067
+            ],
+            [
+              83.28493,
+              17.718067
+            ],
+            [
+              83.28493,
+              17.717933
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w1-005",
+        "detection_type": "change_of_use",
+        "confidence": 0.83,
+        "area_sqm": 567,
+        "status": "underassessed"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.290887,
+              17.740893
+            ],
+            [
+              83.291113,
+              17.740893
+            ],
+            [
+              83.291113,
+              17.741107
+            ],
+            [
+              83.290887,
+              17.741107
+            ],
+            [
+              83.290887,
+              17.740893
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w1-006",
+        "detection_type": "new_build",
+        "confidence": 0.55,
+        "area_sqm": 134,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.297945,
+              17.723948
+            ],
+            [
+              83.298055,
+              17.723948
+            ],
+            [
+              83.298055,
+              17.724052
+            ],
+            [
+              83.297945,
+              17.724052
+            ],
+            [
+              83.297945,
+              17.723948
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w1-007",
+        "detection_type": "change_of_use",
+        "confidence": 0.79,
+        "area_sqm": 299,
+        "status": "already_assessed"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.303918,
+              17.736922
+            ],
+            [
+              83.304082,
+              17.736922
+            ],
+            [
+              83.304082,
+              17.737078
+            ],
+            [
+              83.303918,
+              17.737078
+            ],
+            [
+              83.303918,
+              17.736922
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w1-008",
+        "detection_type": "new_build",
+        "confidence": 0.94,
+        "area_sqm": 680,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.288877,
+              17.715883
+            ],
+            [
+              83.289123,
+              17.715883
+            ],
+            [
+              83.289123,
+              17.716117
+            ],
+            [
+              83.288877,
+              17.716117
+            ],
+            [
+              83.288877,
+              17.715883
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

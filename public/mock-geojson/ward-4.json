@@ -1,0 +1,375 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-001",
+        "detection_type": "new_build",
+        "confidence": 0.96,
+        "area_sqm": 789,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.214867,
+              17.697873
+            ],
+            [
+              83.215133,
+              17.697873
+            ],
+            [
+              83.215133,
+              17.698127
+            ],
+            [
+              83.214867,
+              17.698127
+            ],
+            [
+              83.214867,
+              17.697873
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-002",
+        "detection_type": "change_of_use",
+        "confidence": 0.81,
+        "area_sqm": 267,
+        "status": "verified"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.220923,
+              17.691926
+            ],
+            [
+              83.221077,
+              17.691926
+            ],
+            [
+              83.221077,
+              17.692074
+            ],
+            [
+              83.220923,
+              17.692074
+            ],
+            [
+              83.220923,
+              17.691926
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-003",
+        "detection_type": "new_build",
+        "confidence": 0.74,
+        "area_sqm": 412,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.207904,
+              17.702909
+            ],
+            [
+              83.208096,
+              17.702909
+            ],
+            [
+              83.208096,
+              17.703091
+            ],
+            [
+              83.207904,
+              17.703091
+            ],
+            [
+              83.207904,
+              17.702909
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-004",
+        "detection_type": "new_build",
+        "confidence": 0.88,
+        "area_sqm": 555,
+        "status": "underassessed"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.224889,
+              17.686894
+            ],
+            [
+              83.225111,
+              17.686894
+            ],
+            [
+              83.225111,
+              17.687106
+            ],
+            [
+              83.224889,
+              17.687106
+            ],
+            [
+              83.224889,
+              17.686894
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-005",
+        "detection_type": "change_of_use",
+        "confidence": 0.67,
+        "area_sqm": 189,
+        "status": "false_positive"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.211935,
+              17.694938
+            ],
+            [
+              83.212065,
+              17.694938
+            ],
+            [
+              83.212065,
+              17.695062
+            ],
+            [
+              83.211935,
+              17.695062
+            ],
+            [
+              83.211935,
+              17.694938
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-006",
+        "detection_type": "new_build",
+        "confidence": 0.93,
+        "area_sqm": 632,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.217881,
+              17.700887
+            ],
+            [
+              83.218119,
+              17.700887
+            ],
+            [
+              83.218119,
+              17.701113
+            ],
+            [
+              83.217881,
+              17.701113
+            ],
+            [
+              83.217881,
+              17.700887
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-007",
+        "detection_type": "change_of_use",
+        "confidence": 0.58,
+        "area_sqm": 143,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.206943,
+              17.687946
+            ],
+            [
+              83.207057,
+              17.687946
+            ],
+            [
+              83.207057,
+              17.688054
+            ],
+            [
+              83.206943,
+              17.688054
+            ],
+            [
+              83.206943,
+              17.687946
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-008",
+        "detection_type": "new_build",
+        "confidence": 0.85,
+        "area_sqm": 478,
+        "status": "verified"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.221897,
+              17.706902
+            ],
+            [
+              83.222103,
+              17.706902
+            ],
+            [
+              83.222103,
+              17.707098
+            ],
+            [
+              83.221897,
+              17.707098
+            ],
+            [
+              83.221897,
+              17.706902
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-009",
+        "detection_type": "change_of_use",
+        "confidence": 0.79,
+        "area_sqm": 321,
+        "status": "pending"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.213915,
+              17.693919
+            ],
+            [
+              83.214085,
+              17.693919
+            ],
+            [
+              83.214085,
+              17.694081
+            ],
+            [
+              83.213915,
+              17.694081
+            ],
+            [
+              83.213915,
+              17.693919
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "prop-w4-010",
+        "detection_type": "new_build",
+        "confidence": 0.71,
+        "area_sqm": 265,
+        "status": "already_assessed"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.218923,
+              17.689927
+            ],
+            [
+              83.219077,
+              17.689927
+            ],
+            [
+              83.219077,
+              17.690073
+            ],
+            [
+              83.218923,
+              17.690073
+            ],
+            [
+              83.218923,
+              17.689927
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

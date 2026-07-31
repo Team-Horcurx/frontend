@@ -9,12 +9,23 @@ import './styles/responsive.css';
 import './styles/statusBadge.css';
 import './styles/global.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
-);
+async function enableMocking() {
+  if (import.meta.env.VITE_MOCK !== 'true') return;
+  const { worker } = await import('./mocks/browser.js');
+  return worker.start({
+    onUnhandledRequest: 'warn',
+    serviceWorker: { url: '/mockServiceWorker.js' },
+  });
+}
+
+enableMocking().then(() => {
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </React.StrictMode>
+  );
+});
