@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 import GoogleMapsProvider from './components/GoogleMapsProvider.jsx';
 import Navbar from './components/Navbar.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 import AppSplash from './components/AppSplash.jsx';
 import HomePage from './views/HomePage.jsx';
 import FieldOfficerView from './views/FieldOfficerView.jsx';
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <GoogleMapsProvider>
+      <ScrollToTop />
       <AnimatePresence>{showSplash && <AppSplash key="app-splash" />}</AnimatePresence>
       <Navbar />
       <div className="main-content">

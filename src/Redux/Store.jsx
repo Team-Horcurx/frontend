@@ -5,6 +5,7 @@ import statsReducer from './slices/statsSlice.js';
 import adminReducer from './slices/adminSlice.js';
 import chatReducer from './slices/chatSlice.js';
 import alertsReducer from './slices/alertsSlice.js';
+import assessmentsReducer from './slices/assessmentsSlice.js';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     admin: adminReducer,
     chat: chatReducer,
     alerts: alertsReducer,
+    assessments: assessmentsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

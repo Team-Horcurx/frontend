@@ -54,3 +54,48 @@
   width: 48px;
   height: 22px;
 }
+
+.stats-bar--badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: 0;
+}
+
+.stats-bar__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px var(--space-2);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  animation: fadeInUp var(--transition-normal) both;
+  animation-delay: calc(var(--row-index, 0) * 50ms);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.stats-bar__badge:hover {
+  background: var(--bg-hover);
+  border-color: color-mix(in srgb, var(--accent, var(--color-primary)) 40%, var(--border-color));
+}
+
+.stats-bar__badge-label {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.stats-bar__badge-value {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.stats-bar__badge-skeleton {
+  display: inline-block;
+  width: 20px;
+  height: 12px;
+  vertical-align: middle;
+}

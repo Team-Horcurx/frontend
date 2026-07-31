@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiDownload } from 'react-icons/fi';
 import WardSelector from '../components/WardSelector.jsx';
@@ -6,6 +6,7 @@ import StatsBar from '../components/StatsBar.jsx';
 import PropertyList from '../components/PropertyList.jsx';
 import AlertPanel from '../components/AlertPanel.jsx';
 import PageMotion from '../components/PageMotion.jsx';
+import PendingAssessmentsTable, { PendingAssessmentsBadge } from '../components/PendingAssessmentsPanel.jsx';
 import { exportAlerts, selectExportStatus } from '../Redux/slices/alertsSlice.js';
 import { selectPropertiesError } from '../Redux/slices/propertiesSlice.js';
 import './SupervisorView.css';
@@ -14,6 +15,7 @@ export default function SupervisorView() {
   const dispatch = useDispatch();
   const exportStatus = useSelector(selectExportStatus);
   const error = useSelector(selectPropertiesError);
+  const [assessmentsOpen, setAssessmentsOpen] = useState(false);
 
   async function handleExport() {
     const result = await dispatch(exportAlerts());
@@ -28,7 +30,13 @@ export default function SupervisorView() {
         <div className="supervisor-view__header">
           <div>
             <span className="view-kicker">Supervisor Workspace</span>
-            <h1 className="supervisor-view__title">Ward Oversight</h1>
+            <div className="supervisor-view__title-row">
+              <h1 className="supervisor-view__title">Ward Oversight</h1>
+              <PendingAssessmentsBadge
+                open={assessmentsOpen}
+                onToggle={() => setAssessmentsOpen((v) => !v)}
+              />
+            </div>
           </div>
           <div className="supervisor-view__actions">
             <WardSelector />
@@ -43,6 +51,7 @@ export default function SupervisorView() {
           </div>
         </div>
         {error && <div className="view-error-banner">Failed to load data: {error}</div>}
+        {assessmentsOpen && <PendingAssessmentsTable />}
         <StatsBar />
         <div className="supervisor-view__body">
           <div className="supervisor-view__list">

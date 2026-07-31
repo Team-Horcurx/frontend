@@ -10,9 +10,31 @@ const STATS_CONFIG = [
   { key: 'pendingVerification', label: 'Pending Verification', accent: 'var(--color-info)' },
 ];
 
-export default function StatsBar() {
+export default function StatsBar({ variant = 'card' }) {
   const stats = useSelector(selectWardStats);
   const status = useSelector(selectStatsStatus);
+
+  if (variant === 'badge') {
+    return (
+      <div className="stats-bar stats-bar--badges">
+        {STATS_CONFIG.map(({ key, label, accent }, i) => (
+          <div
+            key={key}
+            className="stats-bar__badge"
+            style={{ '--accent': accent, '--row-index': i }}
+          >
+            <span className="stats-bar__dot" />
+            <span className="stats-bar__badge-label">{label}</span>
+            <span className="stats-bar__badge-value">
+              {status === 'loading' ? (
+                <span className="skeleton-bar stats-bar__badge-skeleton" aria-hidden="true" />
+              ) : !stats ? '—' : (stats[key] ?? 0).toLocaleString()}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="stats-bar">
