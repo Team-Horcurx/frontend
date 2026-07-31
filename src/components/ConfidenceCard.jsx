@@ -5,6 +5,7 @@ import {
   selectSelectedProperty,
   selectFetchOneStatus,
 } from '../Redux/slices/propertiesSlice.js';
+import Loader from './Loader.jsx';
 import './ConfidenceCard.css';
 
 const SIGNALS = [
@@ -85,7 +86,7 @@ export default function ConfidenceCard() {
 
       {fetchOneStatus === 'loading' && (
         <div className="confidence-card__ai-loading">
-          <div className="map-view__spinner" style={{ width: 20, height: 20 }} />
+          <Loader size="sm" label="Loading AI explanation" />
           <span>Loading AI explanation…</span>
         </div>
       )}

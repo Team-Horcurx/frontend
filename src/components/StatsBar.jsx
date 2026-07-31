@@ -19,7 +19,9 @@ export default function StatsBar() {
       {STATS_CONFIG.map(({ key, label, accent }) => (
         <div key={key} className="stats-bar__card" style={{ borderLeftColor: accent }}>
           <div className="stats-bar__value">
-            {status === 'loading' || !stats ? '—' : (stats[key] ?? 0).toLocaleString()}
+            {status === 'loading' ? (
+              <span className="skeleton-bar stats-bar__skeleton" aria-hidden="true" />
+            ) : !stats ? '—' : (stats[key] ?? 0).toLocaleString()}
           </div>
           <div className="stats-bar__label">{label}</div>
         </div>

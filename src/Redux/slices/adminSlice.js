@@ -83,11 +83,17 @@ const adminSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchAdminConfig.pending, (state) => { state.configStatus = 'loading'; })
       .addCase(fetchAdminConfig.fulfilled, (state, action) => {
+        state.configStatus = 'succeeded';
         state.dataMode = action.payload.dataMode;
         state.pipelineStatus = action.payload.pipelineStatus;
         state.lastRefresh = action.payload.lastRefresh;
         state.ndbiThreshold = action.payload.ndbiThreshold;
+      })
+      .addCase(fetchAdminConfig.rejected, (state, action) => {
+        state.configStatus = 'failed';
+        state.error = action.payload;
       })
       .addCase(uploadCSV.pending, (state) => { state.uploadStatus = 'loading'; })
       .addCase(uploadCSV.fulfilled, (state) => {
@@ -113,6 +119,7 @@ export const selectDataMode = (state) => state.admin.dataMode;
 export const selectPipelineStatus = (state) => state.admin.pipelineStatus;
 export const selectLastRefresh = (state) => state.admin.lastRefresh;
 export const selectNdbiThreshold = (state) => state.admin.ndbiThreshold;
+export const selectConfigStatus = (state) => state.admin.configStatus;
 export const selectUploadStatus = (state) => state.admin.uploadStatus;
 export const selectUploadError = (state) => state.admin.uploadError;
 export const selectAdminError = (state) => state.admin.error;

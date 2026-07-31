@@ -1,5 +1,5 @@
 .supervisor-view {
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--nav-offset));
 }
 
 .supervisor-view__content {
@@ -10,12 +10,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
 }
 
 .supervisor-view__title {
   font-size: var(--font-lg);
   font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
   color: var(--text-primary);
 }
 
@@ -58,7 +59,7 @@
 }
 
 .supervisor-view__list {
-  height: calc(100vh - var(--navbar-height) - 260px);
+  height: calc(100vh - var(--nav-offset) - 260px);
   min-height: 300px;
 }
 

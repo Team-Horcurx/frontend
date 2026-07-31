@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import { FiUpload, FiRefreshCw, FiDatabase, FiSliders } from 'react-icons/fi';
-import DemoModeBadge from '../components/DemoModeBadge.jsx';
+import PageMotion from '../components/PageMotion.jsx';
 import {
   uploadCSV,
   saveDbConfig,
@@ -86,8 +86,7 @@ export default function AdminPanel() {
   }
 
   return (
-    <div className="admin-panel">
-      <DemoModeBadge />
+    <PageMotion className="admin-panel">
       <div className="admin-panel__content">
         <div className="admin-panel__header">
           <h1 className="admin-panel__title">Admin Panel</h1>
@@ -259,6 +258,6 @@ export default function AdminPanel() {
 
         </div>
       </div>
-    </div>
+    </PageMotion>
   );
 }

@@ -33,9 +33,9 @@
 
   /* Backgrounds */
   --bg-primary:   #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary:  #f1f3f5;
-  --bg-hover:     #f1f3f5;
+  --bg-secondary: #f8f6f3;
+  --bg-tertiary:  #f2f0ec;
+  --bg-hover:     #f2f0ec;
   --bg-sidebar:   #1a1d21;
   --bg-overlay:   rgba(0, 0, 0, 0.5);
 
@@ -97,11 +97,16 @@
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --shadow-focus: 0 0 0 3px var(--color-primary-light);
 
-/* ── Transitions ──────────────────────────────────────────────── */
-  --transition-fast:   150ms ease;
-  --transition-normal: 250ms ease;
-  --transition-slow:   350ms ease;
+/* ── Motion ───────────────────────────────────────────────────── */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:      cubic-bezier(0, 0, 0.2, 1);
+
+  --transition-fast:   150ms var(--ease-standard);
+  --transition-normal: 250ms var(--ease-standard);
+  --transition-slow:   350ms var(--ease-standard);
 
 /* ── Z-index ──────────────────────────────────────────────────── */
   --z-dropdown:       100;

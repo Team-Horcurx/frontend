@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
+import { FiBarChart2 } from 'react-icons/fi';
 import {
   fetchAllWardsStats,
   selectAllWardsStats,
@@ -8,7 +9,8 @@ import {
   selectAiBrief,
 } from '../Redux/slices/statsSlice.js';
 import MapView from '../components/MapView.jsx';
-import DemoModeBadge from '../components/DemoModeBadge.jsx';
+import EmptyState from '../components/EmptyState.jsx';
+import PageMotion from '../components/PageMotion.jsx';
 import './CommissionerView.css';
 
 export default function CommissionerView() {
@@ -26,8 +28,7 @@ export default function CommissionerView() {
     : [];
 
   return (
-    <div className="commissioner-view">
-      <DemoModeBadge />
+    <PageMotion className="commissioner-view">
       <div className="commissioner-view__content">
         <div className="commissioner-view__header">
           <h1 className="commissioner-view__title">Commissioner Overview</h1>
@@ -41,43 +42,63 @@ export default function CommissionerView() {
           <div className="commissioner-view__sidebar">
             <div className="commissioner-view__top10">
               <h2 className="commissioner-view__section-title">Top 10 Wards by Unassessed</h2>
-              {allWardsStatus === 'loading' ? (
-                <div className="commissioner-view__loading">Loading ward data…</div>
-              ) : (
-                <table className="commissioner-view__table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Ward</th>
-                      <th className="commissioner-view__th--right">Unassessed</th>
-                      <th className="commissioner-view__th--right">Detections</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {top10.map((w, i) => (
-                      <tr key={w.wardId}>
+              <table className="commissioner-view__table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Ward</th>
+                    <th className="commissioner-view__th--right">Unassessed</th>
+                    <th className="commissioner-view__th--right">Detections</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allWardsStatus === 'loading' ? (
+                    [0, 1, 2, 3, 4].map((i) => (
+                      <tr key={`skeleton-${i}`} aria-hidden="true">
                         <td className="commissioner-view__rank">{i + 1}</td>
-                        <td>{w.wardName ?? `Ward ${w.wardId}`}</td>
-                        <td className="commissioner-view__td--right">{w.unassessedCount.toLocaleString()}</td>
-                        <td className="commissioner-view__td--right">{w.totalDetections.toLocaleString()}</td>
-                      </tr>
-                    ))}
-                    {top10.length === 0 && (
-                      <tr>
-                        <td colSpan={4} className="commissioner-view__empty">
-                          No data. Ward stats will appear after pipeline runs.
+                        <td><span className="skeleton-bar commissioner-view__skeleton-cell" /></td>
+                        <td className="commissioner-view__td--right">
+                          <span className="skeleton-bar commissioner-view__skeleton-cell commissioner-view__skeleton-cell--sm" />
+                        </td>
+                        <td className="commissioner-view__td--right">
+                          <span className="skeleton-bar commissioner-view__skeleton-cell commissioner-view__skeleton-cell--sm" />
                         </td>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
-              )}
+                    ))
+                  ) : (
+                    <>
+                      {top10.map((w, i) => (
+                        <tr key={w.wardId}>
+                          <td className="commissioner-view__rank">{i + 1}</td>
+                          <td>{w.wardName ?? `Ward ${w.wardId}`}</td>
+                          <td className="commissioner-view__td--right">{w.unassessedCount.toLocaleString()}</td>
+                          <td className="commissioner-view__td--right">{w.totalDetections.toLocaleString()}</td>
+                        </tr>
+                      ))}
+                      {top10.length === 0 && (
+                        <tr>
+                          <td colSpan={4} className="commissioner-view__empty">
+                            <EmptyState
+                              icon={FiBarChart2}
+                              message="No data. Ward stats will appear after pipeline runs."
+                            />
+                          </td>
+                        </tr>
+                      )}
+                    </>
+                  )}
+                </tbody>
+              </table>
             </div>
 
             <div className="commissioner-view__brief">
               <h2 className="commissioner-view__section-title">AI Daily Brief</h2>
               {allWardsStatus === 'loading' ? (
-                <p className="commissioner-view__brief-loading">Generating brief…</p>
+                <div className="commissioner-view__brief-skeleton" aria-hidden="true">
+                  <span className="skeleton-bar commissioner-view__skeleton-line" />
+                  <span className="skeleton-bar commissioner-view__skeleton-line" />
+                  <span className="skeleton-bar commissioner-view__skeleton-line commissioner-view__skeleton-line--short" />
+                </div>
               ) : aiBrief ? (
                 <div className="commissioner-view__brief-markdown">
                   <ReactMarkdown>{aiBrief}</ReactMarkdown>
@@ -91,6 +112,6 @@ export default function CommissionerView() {
           </div>
         </div>
       </div>
-    </div>
+    </PageMotion>
   );
 }

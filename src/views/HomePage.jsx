@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiMapPin, FiUsers, FiBarChart2, FiSettings } from 'react-icons/fi';
 import { MdSatellite } from 'react-icons/md';
+import PageMotion from '../components/PageMotion.jsx';
 import './HomePage.css';
 
 const ROLES = [
@@ -10,28 +11,28 @@ const ROLES = [
     icon: FiMapPin,
     title: 'Field Officer',
     description: 'Verify flagged properties on the map, review satellite evidence, and update verification status.',
-    accent: '#0d6efd',
+    accent: 'var(--color-primary)',
   },
   {
     path: '/supervisor',
     icon: FiUsers,
     title: 'Supervisor',
     description: 'Monitor ward-level stats, review AI-generated alerts, and export ward reports.',
-    accent: '#198754',
+    accent: 'var(--color-success)',
   },
   {
     path: '/commissioner',
     icon: FiBarChart2,
     title: 'Commissioner',
     description: 'City-wide heatmap, top unassessed wards, revenue estimates, and AI daily brief.',
-    accent: '#ffc107',
+    accent: 'var(--color-warning)',
   },
   {
     path: '/admin',
     icon: FiSettings,
     title: 'Admin Panel',
     description: 'Upload GVMC property CSV, configure database, adjust detection threshold, trigger pipeline.',
-    accent: '#dc3545',
+    accent: 'var(--color-danger)',
   },
 ];
 
@@ -39,7 +40,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div className="home-page">
+    <PageMotion className="home-page">
       <div className="home-page__hero">
         <MdSatellite className="home-page__hero-icon" />
         <h1 className="home-page__title">GVMC Change-Detection Engine</h1>
@@ -65,6 +66,6 @@ export default function HomePage() {
           </div>
         ))}
       </div>
-    </div>
+    </PageMotion>
   );
 }

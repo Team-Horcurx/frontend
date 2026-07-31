@@ -5,7 +5,7 @@ import WardSelector from '../components/WardSelector.jsx';
 import StatsBar from '../components/StatsBar.jsx';
 import PropertyList from '../components/PropertyList.jsx';
 import AlertPanel from '../components/AlertPanel.jsx';
-import DemoModeBadge from '../components/DemoModeBadge.jsx';
+import PageMotion from '../components/PageMotion.jsx';
 import { exportAlerts, selectExportStatus } from '../Redux/slices/alertsSlice.js';
 import { selectPropertiesError } from '../Redux/slices/propertiesSlice.js';
 import './SupervisorView.css';
@@ -23,8 +23,7 @@ export default function SupervisorView() {
   }
 
   return (
-    <div className="supervisor-view">
-      <DemoModeBadge />
+    <PageMotion className="supervisor-view">
       <div className="supervisor-view__content">
         <div className="supervisor-view__header">
           <h1 className="supervisor-view__title">Supervisor</h1>
@@ -51,6 +50,6 @@ export default function SupervisorView() {
           </div>
         </div>
       </div>
-    </div>
+    </PageMotion>
   );
 }

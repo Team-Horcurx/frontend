@@ -8,6 +8,7 @@ import {
 } from '../Redux/slices/wardsSlice.js';
 import { setSelectedProperty } from '../Redux/slices/propertiesSlice.js';
 import { selectSelectedProperty } from '../Redux/slices/propertiesSlice.js';
+import Loader from './Loader.jsx';
 import './MapView.css';
 
 const VIZAG_CENTER = { lat: 17.6869, lng: 83.2185 };
@@ -89,14 +90,16 @@ export default function MapView({ choropleth = false, allWardsGeoJSON = null }) 
       </div>
       {geoJSONStatus === 'loading' && (
         <div className="map-view__loading">
-          <div className="map-view__spinner" />
+          <Loader size="lg" label="Loading ward data" />
           <span>Loading ward data…</span>
         </div>
       )}
       <Map
         defaultCenter={VIZAG_CENTER}
         defaultZoom={VIZAG_ZOOM}
-        mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID || 'DEMO_MAP_ID'}
+        {...(import.meta.env.VITE_GOOGLE_MAPS_MAP_ID
+          ? { mapId: import.meta.env.VITE_GOOGLE_MAPS_MAP_ID }
+          : {})}
         gestureHandling="greedy"
         disableDefaultUI={false}
         style={{ width: '100%', height: '100%' }}

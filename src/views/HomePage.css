@@ -1,5 +1,5 @@
 .home-page {
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--nav-offset));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,6 +22,7 @@
 .home-page__title {
   font-size: var(--font-2xl);
   font-weight: var(--font-weight-bold);
+  letter-spacing: -0.015em;
   color: var(--text-primary);
   margin-bottom: var(--space-3);
 }

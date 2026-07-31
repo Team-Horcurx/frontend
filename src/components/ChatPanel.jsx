@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { FiSend, FiMessageSquare, FiX } from 'react-icons/fi';
 import {
@@ -46,8 +47,15 @@ export default function ChatPanel() {
         <span>{open ? 'Close Chat' : 'AI Assistant'}</span>
       </button>
 
-      {open && (
-        <div className="chat-panel__window">
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="chat-panel__window"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          >
           <div className="chat-panel__header">
             <FiMessageSquare size={16} />
             <span>AI Field Assistant</span>
@@ -102,8 +110,9 @@ export default function ChatPanel() {
               <FiSend size={16} />
             </button>
           </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

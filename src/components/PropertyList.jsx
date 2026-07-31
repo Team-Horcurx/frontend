@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FiMapPin } from 'react-icons/fi';
 import {
   selectProperties,
   selectPropertiesStatus,
@@ -7,6 +8,7 @@ import {
   setSelectedProperty,
 } from '../Redux/slices/propertiesSlice.js';
 import { fetchPropertyById } from '../Redux/slices/propertiesSlice.js';
+import EmptyState from './EmptyState.jsx';
 import './PropertyList.css';
 
 const TYPE_LABELS = { new_build: 'New Build', change_of_use: 'Change of Use' };
@@ -88,7 +90,10 @@ export default function PropertyList() {
             {status !== 'loading' && filtered.length === 0 && (
               <tr>
                 <td colSpan={5} className="property-list__empty">
-                  {properties.length === 0 ? 'Select a ward to load properties.' : 'No matching properties.'}
+                  <EmptyState
+                    icon={FiMapPin}
+                    message={properties.length === 0 ? 'Select a ward to load properties.' : 'No matching properties.'}
+                  />
                 </td>
               </tr>
             )}

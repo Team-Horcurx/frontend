@@ -11,7 +11,10 @@ html {
 }
 
 body {
-  background: var(--bg-secondary);
+  background-color: var(--bg-secondary);
+  background-image: radial-gradient(ellipse 900px 480px at 50% -8%, rgba(13, 110, 253, 0.05), transparent 60%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: var(--line-height-normal);
   font-size: var(--font-base);
@@ -54,4 +57,53 @@ h1, h2, h3, h4, h5, h6 {
   font-size: var(--font-sm);
   margin-bottom: var(--space-3);
   border: 1px solid var(--color-danger);
+}
+
+/* ── Shared skeleton loading ──────────────────────────────────── */
+.skeleton-bar {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-hover) 50%, var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  border-radius: var(--radius-sm);
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+/* ── Shared keyframes ─────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -7,7 +7,7 @@ import PropertyList from '../components/PropertyList.jsx';
 import ConfidenceCard from '../components/ConfidenceCard.jsx';
 import VerifyPanel from '../components/VerifyPanel.jsx';
 import ChatPanel from '../components/ChatPanel.jsx';
-import DemoModeBadge from '../components/DemoModeBadge.jsx';
+import PageMotion from '../components/PageMotion.jsx';
 import { selectSelectedProperty, selectPropertiesError } from '../Redux/slices/propertiesSlice.js';
 import { selectWardsError } from '../Redux/slices/wardsSlice.js';
 import './FieldOfficerView.css';
@@ -19,8 +19,7 @@ export default function FieldOfficerView() {
   const error = propertiesError || wardsError;
 
   return (
-    <div className="officer-view">
-      <DemoModeBadge />
+    <PageMotion className="officer-view">
       <div className="officer-view__content">
         <div className="officer-view__topbar">
           <h1 className="officer-view__title">Field Officer</h1>
@@ -48,6 +47,6 @@ export default function FieldOfficerView() {
         </div>
       </div>
       <ChatPanel />
-    </div>
+    </PageMotion>
   );
 }

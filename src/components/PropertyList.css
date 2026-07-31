@@ -108,13 +108,5 @@
 }
 
 .property-list__empty {
-  padding: var(--space-6);
-  text-align: center;
-  color: var(--text-muted);
-  font-size: var(--font-sm);
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  padding: 0;
 }

@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime.js';
+import { FiBellOff } from 'react-icons/fi';
 import {
   fetchAlerts,
   selectAlerts,
   selectAlertsStatus,
 } from '../Redux/slices/alertsSlice.js';
 import { selectSelectedWardId } from '../Redux/slices/wardsSlice.js';
+import EmptyState from './EmptyState.jsx';
 import './AlertPanel.css';
 
 dayjs.extend(relativeTime);
@@ -33,11 +35,15 @@ export default function AlertPanel() {
         <span className="alert-panel__count">{alerts.length}</span>
       </div>
       <div className="alert-panel__scroll">
-        {status === 'loading' && (
-          <div className="alert-panel__loading">Loading alerts…</div>
-        )}
+        {status === 'loading' && [0, 1, 2].map((i) => (
+          <div key={`skeleton-${i}`} className="alert-panel__card alert-panel__card--skeleton" aria-hidden="true">
+            <span className="skeleton-bar alert-panel__skeleton-badge" />
+            <span className="skeleton-bar alert-panel__skeleton-line" />
+            <span className="skeleton-bar alert-panel__skeleton-line alert-panel__skeleton-line--short" />
+          </div>
+        ))}
         {status !== 'loading' && alerts.length === 0 && (
-          <div className="alert-panel__empty">No alerts for this ward.</div>
+          <EmptyState icon={FiBellOff} message="No alerts for this ward." />
         )}
         {alerts.map((alert) => {
           const cls = SEVERITY_CLASS[alert.severity] ?? 'info';

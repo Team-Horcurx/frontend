@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   selectSelectedProperty,
   selectVerifyStatus,
@@ -69,12 +70,32 @@ export default function VerifyPanel() {
         ))}
       </div>
 
-      {verifyStatus === 'succeeded' && (
-        <div className="verify-panel__success">Status updated successfully.</div>
-      )}
-      {verifyError && (
-        <div className="verify-panel__error">{verifyError}</div>
-      )}
+      <AnimatePresence>
+        {verifyStatus === 'succeeded' && (
+          <motion.div
+            key="verify-success"
+            className="verify-panel__success"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          >
+            Status updated successfully.
+          </motion.div>
+        )}
+        {verifyError && (
+          <motion.div
+            key="verify-error"
+            className="verify-panel__error"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          >
+            {verifyError}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

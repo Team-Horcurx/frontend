@@ -9,7 +9,8 @@
       "Bash(node*)",
       "Bash(ls*)",
       "Bash(mkdir*)",
-      "Bash(find*)"
+      "Bash(find*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/)"
     ],
     "deny": [],
     "ask": []

@@ -4,6 +4,12 @@
   border-radius: var(--radius-lg);
   padding: var(--space-4);
   box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.confidence-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-light);
 }
 
 .confidence-card__header {
@@ -79,7 +85,7 @@
 .confidence-card__signal-bar {
   height: 100%;
   border-radius: 3px;
-  transition: width 0.4s ease;
+  transition: width var(--transition-normal);
 }
 
 .confidence-card__ai-loading {

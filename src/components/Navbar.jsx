@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { MdSatellite } from 'react-icons/md';
+import DemoModeBadge from './DemoModeBadge.jsx';
 import './Navbar.css';
 
 const NAV_LINKS = [
@@ -27,9 +29,24 @@ export default function Navbar() {
               `navbar__link${isActive ? ' navbar__link--active' : ''}`
             }
           >
-            {label}
+            {({ isActive }) => (
+              <>
+                {isActive && (
+                  <motion.span
+                    layoutId="navbar-active-pill"
+                    className="navbar__active-pill"
+                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                  />
+                )}
+                <span className="navbar__link-label">{label}</span>
+              </>
+            )}
           </NavLink>
         ))}
+      </div>
+
+      <div className="navbar__end">
+        <DemoModeBadge />
       </div>
     </nav>
   );

@@ -1,12 +1,12 @@
 .officer-view {
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--nav-offset));
 }
 
 .officer-view__content {
   padding: var(--page-padding-y) var(--page-padding-x);
   display: flex;
   flex-direction: column;
-  height: calc(100vh - var(--navbar-height));
+  height: calc(100vh - var(--nav-offset));
   overflow: hidden;
 }
 
@@ -14,13 +14,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
   flex-shrink: 0;
 }
 
 .officer-view__title {
   font-size: var(--font-lg);
   font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
   color: var(--text-primary);
 }
 
