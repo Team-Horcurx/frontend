@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../api/client.js';
+import { agentApi } from '../../api/client.js';
 
 export const sendChatMessage = createAsyncThunk(
   'chat/send',
   async (message, { rejectWithValue }) => {
     try {
-      const { data } = await api.post('/api/chat', { message });
+      const { data } = await agentApi.post('/api/chat', { message });
       return data.reply ?? data.response ?? data.message ?? '';
     } catch (err) {
       return rejectWithValue(err.message);
