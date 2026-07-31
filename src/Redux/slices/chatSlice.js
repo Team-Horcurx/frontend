@@ -6,7 +6,7 @@ export const sendChatMessage = createAsyncThunk(
   async (message, { rejectWithValue }) => {
     try {
       const { data } = await api.post('/api/chat', { message });
-      return data.response ?? data.message ?? '';
+      return data.reply ?? data.response ?? data.message ?? '';
     } catch (err) {
       return rejectWithValue(err.message);
     }

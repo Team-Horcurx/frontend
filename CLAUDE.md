@@ -43,17 +43,23 @@ A `Navbar` appears on every page for instant role switching. There is **no authe
 
 ```
 src/
-├── App.jsx                     ← React Router root
+├── App.jsx                     ← React Router root; wraps app in GoogleMapsProvider + AnimatePresence splash
+├── main.jsx                    ← Entry point; conditionally enables MSW mock worker
 ├── components/                 ← Shared reusable components
-│   ├── MapView.jsx             ← Leaflet choropleth + polygons
+│   ├── MapView.jsx             ← Google Maps choropleth + GeoJSON polygon layer
+│   ├── ChatPanel.jsx           ← Bedrock Agent chatbot UI (POST /api/chat)
 │   ├── WardSelector.jsx        ← Ward dropdown
 │   ├── PropertyList.jsx        ← Sortable flagged property table
 │   ├── AlertPanel.jsx          ← AI-generated alerts
 │   ├── StatsBar.jsx            ← Summary: new builds | underassessed | revenue estimate
 │   ├── VerifyPanel.jsx         ← Status chips (Verified / False Positive / etc.)
 │   ├── ConfidenceCard.jsx      ← Per-signal breakdown (NDBI, area, NDVI, OSM, DB match)
-│   ├── DemoModeBadge.jsx       ← Yellow banner when using mock data
-│   └── AdminPanel.jsx          ← CSV upload, threshold slider, pipeline trigger
+│   ├── DemoModeBadge.jsx       ← Yellow banner when admin_config.data_mode === 'demo'
+│   ├── AppSplash.jsx           ← Full-screen loading splash (shown until adminConfig loads)
+│   ├── Loader.jsx              ← Inline spinner component
+│   ├── EmptyState.jsx          ← Empty/no-data placeholder
+│   ├── PageMotion.jsx          ← Framer Motion page transition wrapper
+│   └── GoogleMapsProvider.jsx  ← <APIProvider> wrapper for @vis.gl/react-google-maps
 ├── views/
 │   ├── HomePage.jsx
 │   ├── FieldOfficerView.jsx
@@ -61,8 +67,13 @@ src/
 │   └── CommissionerView.jsx
 ├── api/
 │   └── client.js               ← Axios instance pointing to VITE_API_URL
+├── mocks/
+│   ├── browser.js              ← MSW worker setup (public/ directory)
+│   ├── handlers.js             ← Mock API request handlers
+│   └── data/                  ← Static mock data (wards, properties, alerts, stats)
 └── Redux/
-    ├── slices/                 ← RTK slices, one per feature
+    ├── slices/                 ← RTK slices: wardsSlice, propertiesSlice, statsSlice,
+    │                              chatSlice, adminSlice, alertsSlice
     └── Store.jsx               ← Root reducer
 ```
 
@@ -85,21 +96,25 @@ All state management uses **RTK slices only** — there is no legacy nSpace/Acti
 The `MapView` component uses `@vis.gl/react-google-maps` (official Google React library).
 
 - API key from `import.meta.env.VITE_GOOGLE_MAPS_API_KEY`
-- Wrap the entire app in `<APIProvider apiKey={...}>` inside `App.jsx`
+- `<APIProvider>` wraps the entire app via `GoogleMapsProvider.jsx` inside `App.jsx`
 - GeoJSON polygons rendered via `google.maps.Data` layer (`map.data.addGeoJson(...)`)
 - Ward bounds fitting: `new google.maps.LatLngBounds(sw, ne)` → `map.fitBounds(bounds)`
 - Default center: `{ lat: 17.6869, lng: 83.2185 }` (Visakhapatnam), zoom 12
-- No built-in before/after slider — implemented as a toggle overlay (show/hide detection layer)
+- Detection layer toggled as show/hide overlay (no built-in before/after slider)
 - GeoJSON polygons are fetched from S3 via presigned URL from `GET /api/wards/{id}/changes`
 
 Enable in Google Cloud Console: **Maps JavaScript API** (+ Geocoding API if address search is added).
+
+### MSW Mock Development
+
+MSW 2.x intercepts API calls in the browser during development. Enable it by setting `VITE_MOCK=true` in `.env`. `main.jsx` calls `enableMocking()` before rendering when that flag is set. Mock handlers live in `src/mocks/handlers.js`; static data lives in `src/mocks/data/`. The MSW service worker must be in `public/` (`npx msw init public/`).
 
 ### AI Features (Bedrock)
 
 - **Property explainer**: triggered by `GET /api/properties/{id}` — rendered in `ConfidenceCard`
 - **Commissioner brief**: fetched from `GET /api/stats/all-wards`
 - **AI alerts**: fetched per ward and shown in `AlertPanel`
-- **Chatbot**: `POST /api/chat` — renders conversation in the chat UI panel; calls Bedrock Agent
+- **Chatbot**: `POST /api/chat` — `ChatPanel` renders the conversation; calls Bedrock Agent
 
 ### Verification Status
 
@@ -108,21 +123,40 @@ The `VerifyPanel` sends `POST /api/properties/{id}/verify` with status enum:
 
 ### Demo Mode
 
-`DemoModeBadge` shows a yellow site-wide banner when `admin_config.data_mode === 'demo'`. It disappears once a real CSV is uploaded via the Admin panel.
+`DemoModeBadge` shows a yellow site-wide banner when `admin_config.data_mode === 'demo'`. It disappears once a real CSV is uploaded via the Admin panel. `App.jsx` dispatches `fetchAdminConfig()` on mount to populate this.
 
 ## Key Configuration Files
 
 | File | Purpose |
 |------|---------|
-| `vite.config.js` | Vite config — custom JSX plugin, `envPrefix: 'VITE_'`, vitest setup |
-| `src/api/client.js` | Axios instance — reads `VITE_API_URL`, no auth |
-| `.env` | Local env vars (`VITE_API_URL=https://...`) |
+| `vite.config.js` | Vite config — custom JSX plugin, `envPrefix: 'VITE_'`, vitest setup (`jsdom`, `setupFiles: src/tests/setup.js`) |
+| `src/api/client.js` | Axios instance — reads `VITE_API_URL`, response error interceptor |
+| `.env` | Local env vars |
 
 ## Environment Variables
 
 ```
-VITE_API_URL    → Base URL for all API calls (set in .env locally; Amplify console for prod)
+VITE_API_URL              → Base URL for all API calls (set in .env locally; Amplify console for prod)
+VITE_GOOGLE_MAPS_API_KEY  → Google Maps JavaScript API key
+VITE_MOCK                 → Set to 'true' to enable MSW mock mode (dev only)
 ```
+
+## CSS Architecture
+
+Design tokens live in four files imported globally:
+
+| File | Contains |
+|------|---------|
+| `src/styles/variables.css` | 130+ tokens: colors, typography, spacing, shadows, z-index, glass effects, motion easing |
+| `src/styles/responsive.css` | Fluid font scale (`--font-xs` → `--font-2xl`), fluid spacing (`--space-1` → `--space-6`), grid utilities, breakpoints |
+| `src/styles/statusBadge.css` | 9 status badge color sets (success, warning, danger, info, primary, secondary, purple, orange, dark) |
+| `src/styles/global.css` | Box reset, keyframes (shimmer, fadeInUp, pulse-fade, scaleIn), glass-panel, skeleton-bar |
+
+Rules:
+- Never hardcode colors, font sizes, or spacing — use CSS variables
+- BEM naming: `.property-list__header`, `.property-list__row--selected`
+- Co-locate component CSS with JSX in the same folder
+- Never use `!important` in component CSS
 
 ## Amplify Deployment
 
@@ -145,14 +179,6 @@ frontend:
     files:
       - '**/*'
 ```
-
-## CSS Rules
-
-- Never hardcode colors, font sizes, or spacing — use CSS variables from `src/styles/variables.css`
-- Status indicators use variables from `src/styles/statusBadge.css`
-- BEM naming: `.property-list__header`, `.property-list__row--selected`
-- Co-locate component CSS with JSX in the same folder
-- Never use `!important` in component CSS
 
 ## Project Tooling
 
