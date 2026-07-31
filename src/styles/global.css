@@ -59,6 +59,34 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--color-danger);
 }
 
+/* ── Ultrawide-safe content container ─────────────────────────── */
+.view-container {
+  max-width: 1800px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* ── Editorial kicker label ────────────────────────────────────── */
+.view-kicker {
+  display: block;
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+/* ── Floating glass panel (map overlays, drawers) ─────────────── */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-float);
+}
+
 /* ── Shared skeleton loading ──────────────────────────────────── */
 .skeleton-bar {
   display: inline-block;

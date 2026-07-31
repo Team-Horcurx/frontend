@@ -4,7 +4,7 @@
   height: 100%;
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
 }
 
@@ -14,7 +14,6 @@
   gap: var(--space-2);
   padding: var(--space-3);
   border-bottom: 1px solid var(--border-color-light);
-  background: var(--bg-secondary);
   flex-shrink: 0;
 }
 
@@ -26,6 +25,17 @@
   color: var(--text-primary);
   font-size: var(--font-xs);
   cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.property-list__filter-select:hover {
+  border-color: var(--color-primary);
+}
+
+.property-list__filter-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
 }
 
 .property-list__count {
@@ -36,25 +46,28 @@
 
 .property-list__scroll {
   overflow-y: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   flex: 1;
 }
 
 .property-list__table {
   width: 100%;
+  min-width: var(--table-min-width);
   border-collapse: collapse;
   font-size: var(--font-sm);
 }
 
 .property-list__th {
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-3);
   text-align: left;
   font-size: var(--font-xs);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-secondary);
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color-light);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   white-space: nowrap;
   position: sticky;
   top: 0;
@@ -68,7 +81,16 @@
 .property-list__row {
   cursor: pointer;
   border-bottom: 1px solid var(--border-color-light);
-  transition: background var(--transition-fast);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.property-list__row:last-child {
+  border-bottom: none;
+}
+
+.property-list__row:not(.property-list__row--skeleton) {
+  animation: fadeInUp var(--transition-normal) both;
+  animation-delay: min(calc(var(--row-index, 0) * 30ms), 300ms);
 }
 
 .property-list__row:hover {
@@ -77,6 +99,7 @@
 
 .property-list__row--selected {
   background: var(--color-primary-light) !important;
+  box-shadow: inset 3px 0 0 var(--color-primary);
 }
 
 .property-list__row--skeleton {
@@ -84,7 +107,7 @@
 }
 
 .property-list__td {
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-3);
   color: var(--text-primary);
   vertical-align: middle;
 }
@@ -109,4 +132,8 @@
 
 .property-list__empty {
   padding: 0;
+}
+
+@media (max-width: 768px) {
+  .property-list__filter-select { min-height: 44px; }
 }

@@ -24,9 +24,12 @@ export default function SupervisorView() {
 
   return (
     <PageMotion className="supervisor-view">
-      <div className="supervisor-view__content">
+      <div className="supervisor-view__content view-container">
         <div className="supervisor-view__header">
-          <h1 className="supervisor-view__title">Supervisor</h1>
+          <div>
+            <span className="view-kicker">Supervisor Workspace</span>
+            <h1 className="supervisor-view__title">Ward Oversight</h1>
+          </div>
           <div className="supervisor-view__actions">
             <WardSelector />
             <button

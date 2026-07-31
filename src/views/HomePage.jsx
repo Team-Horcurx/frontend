@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiMapPin, FiUsers, FiBarChart2, FiSettings } from 'react-icons/fi';
-import { MdSatellite } from 'react-icons/md';
+import { FiMapPin, FiUsers, FiBarChart2, FiSettings, FiArrowRight } from 'react-icons/fi';
 import PageMotion from '../components/PageMotion.jsx';
 import './HomePage.css';
 
@@ -42,27 +41,29 @@ export default function HomePage() {
   return (
     <PageMotion className="home-page">
       <div className="home-page__hero">
-        <MdSatellite className="home-page__hero-icon" />
-        <h1 className="home-page__title">GVMC Change-Detection Engine</h1>
-        <p className="home-page__subtitle">
-          Satellite-powered property tax assessment for Visakhapatnam's 98 wards
-        </p>
+        <span className="view-kicker">GVMC · Change-Detection Engine</span>
+        <h1 className="home-page__title">Satellite intelligence for Visakhapatnam's 98 wards</h1>
+        <p className="home-page__subtitle">Select a workspace to continue</p>
       </div>
 
-      <div className="home-page__roles">
-        {ROLES.map(({ path, icon: Icon, title, description, accent }) => (
+      <div className="home-page__launcher">
+        {ROLES.map(({ path, icon: Icon, title, description, accent }, i) => (
           <div
             key={path}
-            className="role-card"
-            style={{ '--accent': accent }}
+            className="launcher-row"
+            style={{ '--accent': accent, '--row-index': i }}
             onClick={() => navigate(path)}
           >
-            <div className="role-card__icon-wrap">
-              <Icon className="role-card__icon" />
+            <span className="launcher-row__icon-wrap">
+              <Icon className="launcher-row__icon" />
+            </span>
+            <div className="launcher-row__content">
+              <h2 className="launcher-row__title">{title}</h2>
+              <p className="launcher-row__desc">{description}</p>
             </div>
-            <h2 className="role-card__title">{title}</h2>
-            <p className="role-card__desc">{description}</p>
-            <button className="role-card__btn">Enter →</button>
+            <span className="launcher-row__arrow">
+              <FiArrowRight />
+            </span>
           </div>
         ))}
       </div>

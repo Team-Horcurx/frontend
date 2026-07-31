@@ -3,8 +3,8 @@
   --navbar-height:     60px;
   --navbar-margin-top: 16px;
   --nav-offset: calc(var(--navbar-margin-top) + var(--navbar-height) + 16px);
-  --page-padding-x:  20px;
-  --page-padding-y:  20px;
+  --page-padding-x:  clamp(12px, 4vw, 20px);
+  --page-padding-y:  clamp(12px, 3vh, 20px);
   --table-min-width: 600px;
 
 /* ── Fluid Font Scale ─────────────────────────────────────────── */
@@ -23,6 +23,8 @@
   --space-4: clamp(16px, 2vw,   20px);
   --space-5: clamp(20px, 2.5vw, 24px);
   --space-6: clamp(24px, 3vw,   32px);
+  --space-7: clamp(32px, 4vw,   48px);
+  --space-8: clamp(40px, 5vw,   64px);
 }
 
 /* ── Nav Collapse CSS Contract ────────────────────────────────── */

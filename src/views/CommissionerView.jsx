@@ -29,19 +29,22 @@ export default function CommissionerView() {
 
   return (
     <PageMotion className="commissioner-view">
-      <div className="commissioner-view__content">
-        <div className="commissioner-view__header">
-          <h1 className="commissioner-view__title">Commissioner Overview</h1>
+      <div className="commissioner-view__map">
+        <MapView choropleth />
+      </div>
+
+      <div className="commissioner-view__overlay">
+        <div className="commissioner-view__toolbar glass-panel">
+          <div>
+            <span className="view-kicker">City-Wide View</span>
+            <h1 className="commissioner-view__title">Commissioner Overview</h1>
+          </div>
         </div>
 
-        <div className="commissioner-view__body">
-          <div className="commissioner-view__map">
-            <MapView choropleth />
-          </div>
-
-          <div className="commissioner-view__sidebar">
-            <div className="commissioner-view__top10">
-              <h2 className="commissioner-view__section-title">Top 10 Wards by Unassessed</h2>
+        <div className="commissioner-view__panel glass-panel">
+          <div className="commissioner-view__top10">
+            <h2 className="commissioner-view__section-title">Top 10 Wards by Unassessed</h2>
+            <div className="table-responsive">
               <table className="commissioner-view__table">
                 <thead>
                   <tr>
@@ -90,25 +93,25 @@ export default function CommissionerView() {
                 </tbody>
               </table>
             </div>
+          </div>
 
-            <div className="commissioner-view__brief">
-              <h2 className="commissioner-view__section-title">AI Daily Brief</h2>
-              {allWardsStatus === 'loading' ? (
-                <div className="commissioner-view__brief-skeleton" aria-hidden="true">
-                  <span className="skeleton-bar commissioner-view__skeleton-line" />
-                  <span className="skeleton-bar commissioner-view__skeleton-line" />
-                  <span className="skeleton-bar commissioner-view__skeleton-line commissioner-view__skeleton-line--short" />
-                </div>
-              ) : aiBrief ? (
-                <div className="commissioner-view__brief-markdown">
-                  <ReactMarkdown>{aiBrief}</ReactMarkdown>
-                </div>
-              ) : (
-                <p className="commissioner-view__brief-placeholder">
-                  Phase 3 will render the AI-generated daily brief here using Bedrock Llama 4 Scout.
-                </p>
-              )}
-            </div>
+          <div className="commissioner-view__brief">
+            <h2 className="commissioner-view__section-title">AI Daily Brief</h2>
+            {allWardsStatus === 'loading' ? (
+              <div className="commissioner-view__brief-skeleton" aria-hidden="true">
+                <span className="skeleton-bar commissioner-view__skeleton-line" />
+                <span className="skeleton-bar commissioner-view__skeleton-line" />
+                <span className="skeleton-bar commissioner-view__skeleton-line commissioner-view__skeleton-line--short" />
+              </div>
+            ) : aiBrief ? (
+              <div className="commissioner-view__brief-markdown">
+                <ReactMarkdown>{aiBrief}</ReactMarkdown>
+              </div>
+            ) : (
+              <p className="commissioner-view__brief-placeholder">
+                Phase 3 will render the AI-generated daily brief here using Bedrock Llama 4 Scout.
+              </p>
+            )}
           </div>
         </div>
       </div>

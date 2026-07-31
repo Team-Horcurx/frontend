@@ -16,14 +16,21 @@ export default function StatsBar() {
 
   return (
     <div className="stats-bar">
-      {STATS_CONFIG.map(({ key, label, accent }) => (
-        <div key={key} className="stats-bar__card" style={{ borderLeftColor: accent }}>
+      {STATS_CONFIG.map(({ key, label, accent }, i) => (
+        <div
+          key={key}
+          className="stats-bar__card"
+          style={{ '--accent': accent, '--row-index': i }}
+        >
           <div className="stats-bar__value">
             {status === 'loading' ? (
               <span className="skeleton-bar stats-bar__skeleton" aria-hidden="true" />
             ) : !stats ? '—' : (stats[key] ?? 0).toLocaleString()}
           </div>
-          <div className="stats-bar__label">{label}</div>
+          <div className="stats-bar__label">
+            <span className="stats-bar__dot" />
+            {label}
+          </div>
         </div>
       ))}
     </div>

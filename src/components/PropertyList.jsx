@@ -98,10 +98,11 @@ export default function PropertyList() {
               </tr>
             )}
             {status !== 'loading' &&
-              filtered.map((p) => (
+              filtered.map((p, i) => (
                 <tr
                   key={p.id}
                   className={`property-list__row ${selectedProperty?.id === p.id ? 'property-list__row--selected' : ''}`}
+                  style={{ '--row-index': i }}
                   onClick={() => handleRowClick(p)}
                 >
                   <td className="property-list__td property-list__td--id">

@@ -87,9 +87,12 @@ export default function AdminPanel() {
 
   return (
     <PageMotion className="admin-panel">
-      <div className="admin-panel__content">
+      <div className="admin-panel__content view-container">
         <div className="admin-panel__header">
-          <h1 className="admin-panel__title">Admin Panel</h1>
+          <div>
+            <span className="view-kicker">System Configuration</span>
+            <h1 className="admin-panel__title">Admin Panel</h1>
+          </div>
           <span
             className="status-badge"
             style={{
@@ -105,10 +108,13 @@ export default function AdminPanel() {
 
           {/* CSV Upload */}
           <section className="admin-section">
-            <h2 className="admin-section__title">
-              <FiUpload className="admin-section__icon" />
-              Upload GVMC Property Data
-            </h2>
+            <div className="admin-section__head">
+              <span className="admin-section__number">01</span>
+              <span className="admin-section__icon-wrap">
+                <FiUpload className="admin-section__icon" />
+              </span>
+              <h2 className="admin-section__title">Upload GVMC Property Data</h2>
+            </div>
             <div className="admin-section__row">
               <input
                 ref={fileRef}
@@ -136,10 +142,13 @@ export default function AdminPanel() {
 
           {/* DB Config */}
           <section className="admin-section">
-            <h2 className="admin-section__title">
-              <FiDatabase className="admin-section__icon" />
-              Database Configuration
-            </h2>
+            <div className="admin-section__head">
+              <span className="admin-section__number">02</span>
+              <span className="admin-section__icon-wrap">
+                <FiDatabase className="admin-section__icon" />
+              </span>
+              <h2 className="admin-section__title">Database Configuration</h2>
+            </div>
             <div className="admin-section__form">
               {[
                 { label: 'Host', key: 'host', placeholder: 'rds-endpoint.ap-south-1.rds.amazonaws.com' },
@@ -181,10 +190,13 @@ export default function AdminPanel() {
 
           {/* Pipeline Control */}
           <section className="admin-section">
-            <h2 className="admin-section__title">
-              <FiRefreshCw className="admin-section__icon" />
-              Detection Pipeline
-            </h2>
+            <div className="admin-section__head">
+              <span className="admin-section__number">03</span>
+              <span className="admin-section__icon-wrap">
+                <FiRefreshCw className="admin-section__icon" />
+              </span>
+              <h2 className="admin-section__title">Detection Pipeline</h2>
+            </div>
             <div className="admin-section__pipeline-row">
               <div className="admin-section__pipeline-info">
                 <span className="admin-section__label">Status</span>
@@ -223,10 +235,13 @@ export default function AdminPanel() {
 
           {/* NDBI Threshold */}
           <section className="admin-section">
-            <h2 className="admin-section__title">
-              <FiSliders className="admin-section__icon" />
-              Detection Sensitivity
-            </h2>
+            <div className="admin-section__head">
+              <span className="admin-section__number">04</span>
+              <span className="admin-section__icon-wrap">
+                <FiSliders className="admin-section__icon" />
+              </span>
+              <h2 className="admin-section__title">Detection Sensitivity</h2>
+            </div>
             <div className="admin-section__threshold">
               <div className="admin-section__threshold-label">
                 NDBI Threshold: <strong>{threshold.toFixed(2)}</strong>

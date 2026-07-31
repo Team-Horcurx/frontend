@@ -45,10 +45,10 @@ export default function AlertPanel() {
         {status !== 'loading' && alerts.length === 0 && (
           <EmptyState icon={FiBellOff} message="No alerts for this ward." />
         )}
-        {alerts.map((alert) => {
+        {alerts.map((alert, i) => {
           const cls = SEVERITY_CLASS[alert.severity] ?? 'info';
           return (
-            <div key={alert.id} className="alert-panel__card">
+            <div key={alert.id} className="alert-panel__card" style={{ '--row-index': i }}>
               <div className="alert-panel__card-header">
                 <span
                   className="status-badge"

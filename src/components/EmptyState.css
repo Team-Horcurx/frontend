@@ -38,3 +38,7 @@
   background: var(--bg-hover);
   border-color: var(--color-primary);
 }
+
+@media (max-width: 768px) {
+  .empty-state__action { min-height: 44px; }
+}

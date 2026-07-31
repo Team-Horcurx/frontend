@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 import WardSelector from '../components/WardSelector.jsx';
 import StatsBar from '../components/StatsBar.jsx';
 import MapView from '../components/MapView.jsx';
@@ -20,32 +21,44 @@ export default function FieldOfficerView() {
 
   return (
     <PageMotion className="officer-view">
-      <div className="officer-view__content">
-        <div className="officer-view__topbar">
-          <h1 className="officer-view__title">Field Officer</h1>
-          <WardSelector />
+      <div className="officer-view__map">
+        <MapView />
+      </div>
+
+      <div className="officer-view__overlay">
+        <div className="officer-view__toolbar glass-panel">
+          <div className="officer-view__topbar">
+            <h1 className="officer-view__title">Field Officer</h1>
+            <WardSelector />
+          </div>
+          {error && (
+            <div className="view-error-banner officer-view__error">
+              Failed to load data: {error}
+            </div>
+          )}
+          <StatsBar />
         </div>
-        {error && (
-          <div className="view-error-banner">
-            Failed to load data: {error}
-          </div>
-        )}
-        <StatsBar />
-        <div className="officer-view__main">
-          <div className="officer-view__map">
-            <MapView />
-          </div>
-          <div className="officer-view__sidebar">
-            <PropertyList />
+
+        <div className="officer-view__panel glass-panel">
+          <PropertyList />
+          <AnimatePresence mode="wait">
             {selectedProperty && (
-              <>
+              <motion.div
+                key={selectedProperty.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                className="officer-view__detail"
+              >
                 <ConfidenceCard />
                 <VerifyPanel />
-              </>
+              </motion.div>
             )}
-          </div>
+          </AnimatePresence>
         </div>
       </div>
+
       <ChatPanel />
     </PageMotion>
   );
