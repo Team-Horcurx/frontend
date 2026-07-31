@@ -1,0 +1,53 @@
+/* ── Status Badge CSS Variables ───────────────────────────────── */
+:root {
+  --status-success-bg:   #d1e7dd;
+  --status-success-text: #0f5132;
+
+  --status-warning-bg:   #fff3cd;
+  --status-warning-text: #664d03;
+
+  --status-danger-bg:    #f8d7da;
+  --status-danger-text:  #842029;
+
+  --status-info-bg:      #cff4fc;
+  --status-info-text:    #055160;
+
+  --status-primary-bg:   #cfe2ff;
+  --status-primary-text: #084298;
+
+  --status-secondary-bg:   #e9ecef;
+  --status-secondary-text: #495057;
+
+  --status-purple-bg:   #e8daef;
+  --status-purple-text: #6f42c1;
+
+  --status-orange-bg:   #ffe5d0;
+  --status-orange-text: #7d2e00;
+
+  --status-dark-bg:   #d3d3d4;
+  --status-dark-text: #1a1e21;
+}
+
+/* ── Base Badge ───────────────────────────────────────────────── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--font-xs, 11px);
+  font-weight: var(--font-weight-semibold, 600);
+  text-transform: capitalize;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* ── Predefined Class Variants ────────────────────────────────── */
+.status-badge-success   { background: var(--status-success-bg);   color: var(--status-success-text); }
+.status-badge-warning   { background: var(--status-warning-bg);   color: var(--status-warning-text); }
+.status-badge-danger    { background: var(--status-danger-bg);    color: var(--status-danger-text); }
+.status-badge-info      { background: var(--status-info-bg);      color: var(--status-info-text); }
+.status-badge-primary   { background: var(--status-primary-bg);   color: var(--status-primary-text); }
+.status-badge-secondary { background: var(--status-secondary-bg); color: var(--status-secondary-text); }
+.status-badge-purple    { background: var(--status-purple-bg);    color: var(--status-purple-text); }
+.status-badge-orange    { background: var(--status-orange-bg);    color: var(--status-orange-text); }
+.status-badge-dark      { background: var(--status-dark-bg);      color: var(--status-dark-text); }

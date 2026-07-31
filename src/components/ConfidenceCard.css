@@ -1,0 +1,129 @@
+.confidence-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.confidence-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.confidence-card__score-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.confidence-card__score-label {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.confidence-card__score {
+  font-size: var(--font-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+.confidence-card__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.confidence-card__area {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.confidence-card__signals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.confidence-card__signal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-1);
+}
+
+.confidence-card__signal-label {
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+}
+
+.confidence-card__signal-pct {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.confidence-card__signal-bar-bg {
+  height: 6px;
+  background: var(--bg-secondary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.confidence-card__signal-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.confidence-card__ai-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-color-light);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.confidence-card__ai-text {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-color-light);
+}
+
+.confidence-card__ai-label {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.confidence-card__ai-text p {
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  line-height: var(--line-height-relaxed);
+}
+
+.confidence-card__ai-markdown {
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  line-height: var(--line-height-relaxed);
+}
+
+.confidence-card__ai-markdown p { margin-bottom: var(--space-2); }
+.confidence-card__ai-markdown p:last-child { margin-bottom: 0; }
+.confidence-card__ai-markdown ul, .confidence-card__ai-markdown ol {
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+.confidence-card__ai-markdown strong { font-weight: var(--font-weight-semibold); }

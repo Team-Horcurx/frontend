@@ -1,0 +1,54 @@
+/* ── Layout Tokens ────────────────────────────────────────────── */
+:root {
+  --navbar-height:   56px;
+  --page-padding-x:  20px;
+  --page-padding-y:  20px;
+  --table-min-width: 600px;
+
+/* ── Fluid Font Scale ─────────────────────────────────────────── */
+  --font-xs:   clamp(10px, 1.2vw, 12px);
+  --font-sm:   clamp(12px, 1.4vw, 13px);
+  --font-base: clamp(13px, 1.5vw, 14px);
+  --font-md:   clamp(14px, 1.8vw, 16px);
+  --font-lg:   clamp(16px, 2vw, 20px);
+  --font-xl:   clamp(20px, 2.5vw, 24px);
+  --font-2xl:  clamp(24px, 3vw, 32px);
+
+/* ── Fluid Spacing ────────────────────────────────────────────── */
+  --space-1: clamp(4px,  0.5vw,  6px);
+  --space-2: clamp(8px,  1vw,   12px);
+  --space-3: clamp(12px, 1.5vw, 16px);
+  --space-4: clamp(16px, 2vw,   20px);
+  --space-5: clamp(20px, 2.5vw, 24px);
+  --space-6: clamp(24px, 3vw,   32px);
+}
+
+/* ── Nav Collapse CSS Contract ────────────────────────────────── */
+.main-content {
+  padding-top: var(--navbar-height);
+  min-height: 100vh;
+}
+
+/* ── Responsive Grid Utilities ────────────────────────────────── */
+.grid           { display: grid; gap: var(--spacing-4); }
+.grid-cols-1    { grid-template-columns: 1fr; }
+.grid-cols-2    { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3    { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4    { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1024px) {
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .lg\:grid-cols-1 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 { grid-template-columns: 1fr; }
+}
+
+/* ── Table Responsive ─────────────────────────────────────────── */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
