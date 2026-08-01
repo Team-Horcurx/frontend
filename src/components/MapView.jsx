@@ -9,6 +9,8 @@ import {
 import { setSelectedProperty } from '../Redux/slices/propertiesSlice.js';
 import { selectSelectedProperty } from '../Redux/slices/propertiesSlice.js';
 import Loader from './Loader.jsx';
+import NdbiHeatmapLayer from './NdbiHeatmapLayer.jsx';
+import NdbiLegend from './NdbiLegend.jsx';
 import './MapView.css';
 
 const VIZAG_CENTER = { lat: 17.6869, lng: 83.2185 };
@@ -77,6 +79,7 @@ function MapContent({ showPolygons }) {
 export default function MapView({ choropleth = false, allWardsGeoJSON = null }) {
   const geoJSONStatus = useSelector(selectGeoJSONStatus);
   const [showPolygons, setShowPolygons] = useState(true);
+  const [showNdbi, setShowNdbi] = useState(false);
 
   return (
     <div className="map-view">
@@ -86,6 +89,12 @@ export default function MapView({ choropleth = false, allWardsGeoJSON = null }) 
           onClick={() => setShowPolygons((v) => !v)}
         >
           {showPolygons ? 'Hide' : 'Show'} Change Polygons
+        </button>
+        <button
+          className={`map-view__toggle ${showNdbi ? 'map-view__toggle--active' : ''}`}
+          onClick={() => setShowNdbi((v) => !v)}
+        >
+          {showNdbi ? 'Hide' : 'Show'} NDBI Heatmap
         </button>
       </div>
       {geoJSONStatus === 'loading' && (
@@ -105,7 +114,9 @@ export default function MapView({ choropleth = false, allWardsGeoJSON = null }) 
         style={{ width: '100%', height: '100%' }}
       >
         <MapContent showPolygons={showPolygons} />
+        <NdbiHeatmapLayer visible={showNdbi} />
       </Map>
+      {showNdbi && <NdbiLegend />}
     </div>
   );
 }

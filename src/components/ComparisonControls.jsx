@@ -1,6 +1,5 @@
 import React from 'react';
 import { FiChevronDown } from 'react-icons/fi';
-import { getComparisonStats, COMPARISON_YEARS } from '../mockData/comparisonData.js';
 import './ComparisonControls.css';
 
 const STATS_CONFIG = [
@@ -12,8 +11,18 @@ const STATS_CONFIG = [
   { key: 'estimatedTaxImpactInr', label: 'Tax Impact', accent: 'var(--color-success)', prefix: '₹' },
 ];
 
-export default function ComparisonControls({ baseYear, compareYear, onBaseYearChange, onCompareYearChange }) {
-  const stats = getComparisonStats(baseYear, compareYear);
+export default function ComparisonControls({
+  baseYearOptions = [],
+  compareYearOptions = [],
+  baseYear,
+  compareYear,
+  onBaseYearChange,
+  onCompareYearChange,
+  stats,
+  isLoading = false,
+}) {
+  const hasBaseYears = baseYearOptions.length > 0;
+  const hasCompareYears = compareYearOptions.length > 0;
 
   return (
     <div className="comparison-controls">
@@ -26,11 +35,13 @@ export default function ComparisonControls({ baseYear, compareYear, onBaseYearCh
             <select
               id="compare-base-year"
               className="comparison-controls__select"
-              value={baseYear}
+              value={baseYear ?? ''}
               onChange={(e) => onBaseYearChange(Number(e.target.value))}
+              disabled={!hasBaseYears}
             >
-              {COMPARISON_YEARS.map((y) => (
-                <option key={y} value={y} disabled={y >= compareYear}>{y}</option>
+              {!hasBaseYears && <option value="">No years available</option>}
+              {baseYearOptions.map((y) => (
+                <option key={y} value={y}>{y}</option>
               ))}
             </select>
             <FiChevronDown className="comparison-controls__chevron" aria-hidden="true" />
@@ -42,11 +53,13 @@ export default function ComparisonControls({ baseYear, compareYear, onBaseYearCh
             <select
               id="compare-current-year"
               className="comparison-controls__select"
-              value={compareYear}
+              value={compareYear ?? ''}
               onChange={(e) => onCompareYearChange(Number(e.target.value))}
+              disabled={!hasCompareYears}
             >
-              {COMPARISON_YEARS.map((y) => (
-                <option key={y} value={y} disabled={y <= baseYear}>{y}</option>
+              {!hasCompareYears && <option value="">No years available</option>}
+              {compareYearOptions.map((y) => (
+                <option key={y} value={y}>{y}</option>
               ))}
             </select>
             <FiChevronDown className="comparison-controls__chevron" aria-hidden="true" />
@@ -55,17 +68,21 @@ export default function ComparisonControls({ baseYear, compareYear, onBaseYearCh
       </div>
 
       <div className="stats-bar comparison-controls__stats">
-        {STATS_CONFIG.map(({ key, label, accent, prefix, suffix, decimals }, i) => (
-          <div key={key} className="stats-bar__card" style={{ '--accent': accent, '--row-index': i }}>
-            <div className="stats-bar__value">
-              {prefix ?? ''}{decimals != null ? stats[key].toFixed(decimals) : stats[key].toLocaleString()}{suffix ?? ''}
+        {STATS_CONFIG.map(({ key, label, accent, prefix, suffix, decimals }, i) => {
+          const value = stats?.[key];
+          const display = isLoading || value == null
+            ? '—'
+            : `${prefix ?? ''}${decimals != null ? value.toFixed(decimals) : value.toLocaleString()}${suffix ?? ''}`;
+          return (
+            <div key={key} className="stats-bar__card" style={{ '--accent': accent, '--row-index': i }}>
+              <div className="stats-bar__value">{display}</div>
+              <div className="stats-bar__label">
+                <span className="stats-bar__dot" />
+                {label}
+              </div>
             </div>
-            <div className="stats-bar__label">
-              <span className="stats-bar__dot" />
-              {label}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

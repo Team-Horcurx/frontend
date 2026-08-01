@@ -7,6 +7,7 @@ import chatReducer from './slices/chatSlice.js';
 import alertsReducer from './slices/alertsSlice.js';
 import assessmentsReducer from './slices/assessmentsSlice.js';
 import ticketsReducer from './slices/ticketsSlice.js';
+import ndbiReducer from './slices/ndbiSlice.js';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     alerts: alertsReducer,
     assessments: assessmentsReducer,
     tickets: ticketsReducer,
+    ndbi: ndbiReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

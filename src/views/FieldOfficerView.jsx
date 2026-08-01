@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import WardSelector from '../components/WardSelector.jsx';
 import StatsBar from '../components/StatsBar.jsx';
@@ -12,23 +12,69 @@ import PageMotion from '../components/PageMotion.jsx';
 import ComparisonControls from '../components/ComparisonControls.jsx';
 import OfficerAssessmentForm from '../components/OfficerAssessmentForm.jsx';
 import RaiseTicketPanel from '../components/RaiseTicketPanel.jsx';
-import { COMPARISON_YEARS } from '../mockData/comparisonData.js';
 import { selectSelectedProperty, selectPropertiesError } from '../Redux/slices/propertiesSlice.js';
-import { selectWardsError } from '../Redux/slices/wardsSlice.js';
+import { selectWardsError, selectSelectedWardId } from '../Redux/slices/wardsSlice.js';
+import {
+  fetchNdbiGrid,
+  fetchComparisonStats,
+  clearGrid,
+  clearComparisonStats,
+  selectWardYearPairs,
+  selectNdbiError,
+  selectComparisonStats,
+  selectComparisonStatus,
+  pickDefaultPair,
+} from '../Redux/slices/ndbiSlice.js';
 import './FieldOfficerView.css';
 
 export default function FieldOfficerView() {
+  const dispatch = useDispatch();
   const selectedProperty = useSelector(selectSelectedProperty);
   const propertiesError = useSelector(selectPropertiesError);
   const wardsError = useSelector(selectWardsError);
-  const error = propertiesError || wardsError;
+  const ndbiError = useSelector(selectNdbiError);
+  const error = propertiesError || wardsError || ndbiError;
 
-  const [baseYear, setBaseYear] = useState(COMPARISON_YEARS[0]);
-  const [compareYear, setCompareYear] = useState(COMPARISON_YEARS[1]);
+  const selectedWardId = useSelector(selectSelectedWardId);
+  const yearPairs = useSelector(selectWardYearPairs);
+  const comparisonStats = useSelector(selectComparisonStats);
+  const comparisonStatus = useSelector(selectComparisonStatus);
+
+  const baseYearOptions = useMemo(
+    () => Array.from(new Set(yearPairs.map((p) => p.baselineYear))).sort((a, b) => a - b),
+    [yearPairs]
+  );
+
+  const [baseYear, setBaseYear] = useState(null);
+  const [compareYear, setCompareYear] = useState(null);
   const [ticketMode, setTicketMode] = useState(false);
   const [ticketRaised, setTicketRaised] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const detailRef = useRef(null);
+
+  const compareYearOptions = useMemo(
+    () => Array.from(new Set(yearPairs.filter((p) => p.baselineYear === baseYear).map((p) => p.comparisonYear))).sort((a, b) => a - b),
+    [yearPairs, baseYear]
+  );
+
+  // Ward switched (or years finished loading) — pick a default that is
+  // guaranteed to be a real (baseline, comparison) pair, never a synthesized
+  // combination that doesn't exist in the data.
+  useEffect(() => {
+    const defaultPair = pickDefaultPair(yearPairs);
+    setBaseYear(defaultPair?.baselineYear ?? null);
+    setCompareYear(defaultPair?.comparisonYear ?? null);
+  }, [yearPairs]);
+
+  useEffect(() => {
+    if (!selectedWardId || baseYear == null || compareYear == null || baseYear >= compareYear) {
+      dispatch(clearGrid());
+      dispatch(clearComparisonStats());
+      return;
+    }
+    dispatch(fetchNdbiGrid({ wardId: selectedWardId, baselineYear: baseYear, comparisonYear: compareYear }));
+    dispatch(fetchComparisonStats({ wardId: selectedWardId, baselineYear: baseYear, comparisonYear: compareYear }));
+  }, [selectedWardId, baseYear, compareYear, dispatch]);
 
   useEffect(() => {
     setTicketMode(false);
@@ -53,15 +99,17 @@ export default function FieldOfficerView() {
 
   function handleBaseYearChange(year) {
     setBaseYear(year);
-    if (compareYear <= year) {
-      setCompareYear(COMPARISON_YEARS.find((y) => y > year) ?? year);
+    const validCompareYears = yearPairs.filter((p) => p.baselineYear === year).map((p) => p.comparisonYear);
+    if (!validCompareYears.includes(compareYear)) {
+      setCompareYear(validCompareYears.length ? Math.max(...validCompareYears) : null);
     }
   }
 
   function handleCompareYearChange(year) {
     setCompareYear(year);
-    if (year <= baseYear) {
-      setBaseYear([...COMPARISON_YEARS].reverse().find((y) => y < year) ?? year);
+    const validBaseYears = yearPairs.filter((p) => p.comparisonYear === year).map((p) => p.baselineYear);
+    if (!validBaseYears.includes(baseYear)) {
+      setBaseYear(validBaseYears.length ? Math.min(...validBaseYears) : null);
     }
   }
 
@@ -96,10 +144,14 @@ export default function FieldOfficerView() {
             </div>
           )}
           <ComparisonControls
+            baseYearOptions={baseYearOptions}
+            compareYearOptions={compareYearOptions}
             baseYear={baseYear}
             compareYear={compareYear}
             onBaseYearChange={handleBaseYearChange}
             onCompareYearChange={handleCompareYearChange}
+            stats={comparisonStats}
+            isLoading={comparisonStatus === 'loading'}
           />
           <div className="officer-view__section">
             <span className="officer-view__section-heading">Analytics</span>

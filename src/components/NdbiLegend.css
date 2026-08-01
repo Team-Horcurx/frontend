@@ -1,0 +1,39 @@
+.ndbi-legend {
+  position: absolute;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--font-sm);
+}
+
+.ndbi-legend__heading {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ndbi-legend__caption {
+  font-size: 0.75em;
+  color: var(--text-secondary);
+  max-width: 220px;
+  margin-bottom: var(--space-1);
+}
+
+.ndbi-legend__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+}
+
+.ndbi-legend__swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-sm, 3px);
+  flex-shrink: 0;
+}

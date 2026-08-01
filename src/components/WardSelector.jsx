@@ -11,6 +11,7 @@ import {
 } from '../Redux/slices/wardsSlice.js';
 import { fetchProperties } from '../Redux/slices/propertiesSlice.js';
 import { fetchStats } from '../Redux/slices/statsSlice.js';
+import { fetchWardYears } from '../Redux/slices/ndbiSlice.js';
 import './WardSelector.css';
 
 export default function WardSelector() {
@@ -30,6 +31,7 @@ export default function WardSelector() {
     dispatch(fetchWardGeoJSON(wardId));
     dispatch(fetchProperties({ wardId }));
     dispatch(fetchStats({ wardId }));
+    dispatch(fetchWardYears(wardId));
   }
 
   return (
