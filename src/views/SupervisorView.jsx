@@ -53,17 +53,17 @@ export default function SupervisorView() {
         </div>
         {error && <div className="view-error-banner">Failed to load data: {error}</div>}
         {assessmentsOpen && <PendingAssessmentsTable />}
-        <StatsBar />
         <div className="supervisor-view__body">
-          <div className="supervisor-view__list">
-            <PropertyList />
+          <div className="supervisor-view__tickets">
+            <TicketsList />
           </div>
           <div className="supervisor-view__alerts">
             <AlertPanel />
           </div>
-        </div>
-        <div className="supervisor-view__tickets">
-          <TicketsList />
+          <StatsBar />
+          <div className="supervisor-view__list">
+            <PropertyList />
+          </div>
         </div>
       </div>
     </PageMotion>

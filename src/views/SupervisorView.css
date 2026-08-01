@@ -74,10 +74,6 @@
   min-height: 300px;
 }
 
-.supervisor-view__tickets {
-  margin-top: var(--space-4);
-}
-
 @media (max-width: 1024px) {
   .supervisor-view__list { height: clamp(280px, 50vh, 420px); }
 }
