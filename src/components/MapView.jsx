@@ -192,6 +192,7 @@ export default function MapView({ choropleth = false, allWardsData = null, heatm
 
   return (
     <div className="map-view">
+      {/* Hide/Show Change Polygons button — commented out until GeoJSON is uploaded to S3
       {!choropleth && (
         <div className="map-view__controls">
           <button
@@ -202,6 +203,7 @@ export default function MapView({ choropleth = false, allWardsData = null, heatm
           </button>
         </div>
       )}
+      */}
       {geoJSONStatus === 'loading' && (
         <div className="map-view__loading">
           <Loader size="lg" label="Loading ward data" />

@@ -65,7 +65,7 @@
 .map-view__legend {
   position: absolute;
   bottom: var(--space-4);
-  right: var(--space-4);
+  left: var(--space-4);
   z-index: 10;
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
