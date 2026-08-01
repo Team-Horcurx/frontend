@@ -132,4 +132,11 @@
   --input-border-color:       var(--border-color);
   --input-focus-border-color: var(--color-primary);
   --input-placeholder-color:  var(--color-gray-500);
+
+/* ── NDBI Choropleth Scale ────────────────────────────────────── */
+  --ndbi-high:     #c0392b;
+  --ndbi-moderate: #e67e22;
+  --ndbi-low:      #f1c40f;
+  --ndbi-minimal:  #f9e79f;
+  --ndbi-none:     #ecf0f1;
 }

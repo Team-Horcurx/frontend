@@ -13,7 +13,7 @@ import { fetchProperties } from '../Redux/slices/propertiesSlice.js';
 import { fetchStats } from '../Redux/slices/statsSlice.js';
 import './WardSelector.css';
 
-export default function WardSelector() {
+export default function WardSelector({ compareYear }) {
   const dispatch = useDispatch();
   const wards = useSelector(selectWards);
   const selectedWardId = useSelector(selectSelectedWardId);
@@ -27,8 +27,8 @@ export default function WardSelector() {
     const wardId = e.target.value;
     if (!wardId) return;
     dispatch(setSelectedWard(wardId));
-    dispatch(fetchWardGeoJSON(wardId));
-    dispatch(fetchProperties({ wardId }));
+    // dispatch(fetchWardGeoJSON(wardId)); // S3 geojson files not uploaded yet
+    dispatch(fetchProperties({ wardId, compareYear }));
     dispatch(fetchStats({ wardId }));
   }
 

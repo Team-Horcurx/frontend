@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import WardSelector from '../components/WardSelector.jsx';
 import StatsBar from '../components/StatsBar.jsx';
@@ -13,12 +13,14 @@ import ComparisonControls from '../components/ComparisonControls.jsx';
 import OfficerAssessmentForm from '../components/OfficerAssessmentForm.jsx';
 import RaiseTicketPanel from '../components/RaiseTicketPanel.jsx';
 import { COMPARISON_YEARS } from '../mockData/comparisonData.js';
-import { selectSelectedProperty, selectPropertiesError } from '../Redux/slices/propertiesSlice.js';
-import { selectWardsError } from '../Redux/slices/wardsSlice.js';
+import { selectSelectedProperty, selectPropertiesError, fetchProperties } from '../Redux/slices/propertiesSlice.js';
+import { selectSelectedWardId, selectWardsError } from '../Redux/slices/wardsSlice.js';
 import './FieldOfficerView.css';
 
 export default function FieldOfficerView() {
+  const dispatch = useDispatch();
   const selectedProperty = useSelector(selectSelectedProperty);
+  const selectedWardId = useSelector(selectSelectedWardId);
   const propertiesError = useSelector(selectPropertiesError);
   const wardsError = useSelector(selectWardsError);
   const error = propertiesError || wardsError;
@@ -29,6 +31,7 @@ export default function FieldOfficerView() {
   const [ticketRaised, setTicketRaised] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const detailRef = useRef(null);
+  const yearInitRef = useRef(true);
 
   useEffect(() => {
     setTicketMode(false);
@@ -65,10 +68,17 @@ export default function FieldOfficerView() {
     }
   }
 
+  // Re-fetch properties filtered by comparison year whenever year changes (skip first render)
+  useEffect(() => {
+    if (yearInitRef.current) { yearInitRef.current = false; return; }
+    if (!selectedWardId) return;
+    dispatch(fetchProperties({ wardId: selectedWardId, compareYear }));
+  }, [compareYear]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <PageMotion className="officer-view">
       <div className="officer-view__map">
-        <MapView />
+        <MapView heatmap={!!selectedWardId} />
       </div>
 
       <div className="officer-view__overlay">
@@ -88,7 +98,7 @@ export default function FieldOfficerView() {
         <div className="officer-view__toolbar glass-panel">
           <div className="officer-view__topbar">
             <h1 className="officer-view__title">Field Officer</h1>
-            <WardSelector />
+            <WardSelector compareYear={compareYear} />
           </div>
           {error && (
             <div className="view-error-banner officer-view__error">

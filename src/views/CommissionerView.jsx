@@ -36,7 +36,7 @@ export default function CommissionerView() {
   return (
     <PageMotion className="commissioner-view">
       <div className="commissioner-view__map">
-        <MapView choropleth />
+        <MapView choropleth allWardsData={allWardsStats} />
       </div>
 
       <div className="commissioner-view__overlay">

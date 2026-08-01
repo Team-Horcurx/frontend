@@ -23,6 +23,8 @@ export function mapAllWardsAPIToUI(ward) {
     openTickets: ward.open_tickets ?? 0,
     resolvedTickets: ward.resolved_tickets ?? 0,
     aiBrief: ward.ai_brief ?? null,
+    avgNdbiDelta: ward.avg_ndbi_delta ?? 0,
+    maxNdbiDelta: ward.max_ndbi_delta ?? 0,
   };
 }
 

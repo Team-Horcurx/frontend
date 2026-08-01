@@ -10,10 +10,13 @@ export function mapAPIToUI(prop) {
     areaSqm: prop.area_sqm,
     detectionType: prop.detection_type,
     confidence: prop.confidence,
+    ndbiDelta: prop.ndbi_delta ?? prop.confidence_breakdown?.ndbi_delta ?? 0,
     confidenceBreakdown: prop.confidence_breakdown ?? {},
     detectedAt: prop.detected_at,
     s3GeojsonKey: prop.s3_geojson_key,
     status: prop.status ?? 'pending',
+    comparisonYear: prop.comparison_year ?? null,
+    baselineYear: prop.baseline_year ?? null,
     aiExplanation: prop.ai_explanation ?? null,
   };
 }
@@ -30,11 +33,12 @@ export function mapUIToAPI(prop) {
 
 export const fetchProperties = createAsyncThunk(
   'properties/fetchByWard',
-  async ({ wardId, type, status }, { rejectWithValue }) => {
+  async ({ wardId, type, status, compareYear }, { rejectWithValue }) => {
     try {
       const params = {};
       if (type) params.type = type;
       if (status) params.status = status;
+      if (compareYear) params.comparison_year = compareYear;
       const { data } = await api.get(`/api/wards/${wardId}/unassessed`, { params });
       return data.map(mapAPIToUI);
     } catch (err) {

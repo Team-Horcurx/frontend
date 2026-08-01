@@ -43,12 +43,14 @@ export const handlers = [
   // propertiesSlice.fetchProperties
   http.get(`${BASE}/api/wards/:wardId/unassessed`, async ({ params, request }) => {
     const url = new URL(request.url);
-    const typeFilter   = url.searchParams.get('type');
-    const statusFilter = url.searchParams.get('status');
+    const typeFilter       = url.searchParams.get('type');
+    const statusFilter     = url.searchParams.get('status');
+    const comparisonYear   = url.searchParams.get('comparison_year');
     await delay(400);
     let subset = properties.filter(p => p.ward_id === params.wardId);
-    if (typeFilter)   subset = subset.filter(p => p.detection_type === typeFilter);
-    if (statusFilter) subset = subset.filter(p => p.status === statusFilter);
+    if (typeFilter)      subset = subset.filter(p => p.detection_type === typeFilter);
+    if (statusFilter)    subset = subset.filter(p => p.status === statusFilter);
+    if (comparisonYear)  subset = subset.filter(p => p.comparison_year === parseInt(comparisonYear, 10));
     return HttpResponse.json(subset);
   }),
 
