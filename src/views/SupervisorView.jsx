@@ -7,6 +7,7 @@ import PropertyList from '../components/PropertyList.jsx';
 import AlertPanel from '../components/AlertPanel.jsx';
 import PageMotion from '../components/PageMotion.jsx';
 import PendingAssessmentsTable, { PendingAssessmentsBadge } from '../components/PendingAssessmentsPanel.jsx';
+import TicketsList from '../components/TicketsList.jsx';
 import { exportAlerts, selectExportStatus } from '../Redux/slices/alertsSlice.js';
 import { selectPropertiesError } from '../Redux/slices/propertiesSlice.js';
 import './SupervisorView.css';
@@ -60,6 +61,9 @@ export default function SupervisorView() {
           <div className="supervisor-view__alerts">
             <AlertPanel />
           </div>
+        </div>
+        <div className="supervisor-view__tickets">
+          <TicketsList />
         </div>
       </div>
     </PageMotion>

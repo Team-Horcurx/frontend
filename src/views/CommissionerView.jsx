@@ -58,6 +58,7 @@ export default function CommissionerView() {
                     <th>Ward</th>
                     <th className="commissioner-view__th--right">Unassessed</th>
                     <th className="commissioner-view__th--right">Detections</th>
+                    <th className="commissioner-view__th--right">Open Tickets</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -66,6 +67,9 @@ export default function CommissionerView() {
                       <tr key={`skeleton-${i}`} aria-hidden="true">
                         <td className="commissioner-view__rank">{i + 1}</td>
                         <td><span className="skeleton-bar commissioner-view__skeleton-cell" /></td>
+                        <td className="commissioner-view__td--right">
+                          <span className="skeleton-bar commissioner-view__skeleton-cell commissioner-view__skeleton-cell--sm" />
+                        </td>
                         <td className="commissioner-view__td--right">
                           <span className="skeleton-bar commissioner-view__skeleton-cell commissioner-view__skeleton-cell--sm" />
                         </td>
@@ -82,11 +86,26 @@ export default function CommissionerView() {
                           <td>{w.wardName ?? `Ward ${w.wardId}`}</td>
                           <td className="commissioner-view__td--right">{w.unassessedCount.toLocaleString()}</td>
                           <td className="commissioner-view__td--right">{w.totalDetections.toLocaleString()}</td>
+                          <td className="commissioner-view__td--right">
+                            {w.openTickets > 0 ? (
+                              <span
+                                className="status-badge"
+                                style={{
+                                  background: 'var(--status-danger-bg)',
+                                  color: 'var(--status-danger-text)',
+                                }}
+                              >
+                                {w.openTickets}
+                              </span>
+                            ) : (
+                              <span style={{ color: 'var(--text-tertiary)' }}>—</span>
+                            )}
+                          </td>
                         </tr>
                       ))}
                       {top10.length === 0 && (
                         <tr>
-                          <td colSpan={4} className="commissioner-view__empty">
+                          <td colSpan={5} className="commissioner-view__empty">
                             <EmptyState
                               icon={FiBarChart2}
                               message="No data. Ward stats will appear after pipeline runs."

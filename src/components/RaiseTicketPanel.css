@@ -1,0 +1,181 @@
+.raise-ticket-panel {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.raise-ticket-panel__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.raise-ticket-panel__back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.raise-ticket-panel__back-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.raise-ticket-panel__title {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.raise-ticket-panel__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.raise-ticket-panel__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.raise-ticket-panel__label {
+  font-size: var(--font-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+}
+
+.raise-ticket-panel__required {
+  color: var(--color-danger);
+  margin-left: 2px;
+}
+
+.raise-ticket-panel__optional {
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-normal);
+  margin-left: var(--space-1);
+}
+
+.raise-ticket-panel__input,
+.raise-ticket-panel__textarea {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.raise-ticket-panel__input:focus,
+.raise-ticket-panel__textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-alpha);
+}
+
+.raise-ticket-panel__input--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.raise-ticket-panel__textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+.raise-ticket-panel__upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.raise-ticket-panel__upload-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.raise-ticket-panel__file-input {
+  display: none;
+}
+
+.raise-ticket-panel__upload-ok {
+  font-size: var(--font-xs);
+  color: var(--status-success-text);
+  margin-top: var(--space-1);
+}
+
+.raise-ticket-panel__upload-error {
+  font-size: var(--font-xs);
+  color: var(--status-danger-text);
+  margin-top: var(--space-1);
+}
+
+.raise-ticket-panel__submit-btn {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: filter var(--transition-fast), transform var(--transition-fast);
+  margin-top: var(--space-1);
+}
+
+.raise-ticket-panel__submit-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.raise-ticket-panel__submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.raise-ticket-panel__success {
+  padding: var(--space-2) var(--space-3);
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+}
+
+.raise-ticket-panel__error {
+  padding: var(--space-2) var(--space-3);
+  background: var(--status-danger-bg);
+  color: var(--status-danger-text);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+}

@@ -20,6 +20,8 @@ export function mapAllWardsAPIToUI(ward) {
     wardName: ward.ward_name,
     unassessedCount: ward.unassessed_count ?? 0,
     totalDetections: ward.total_detections ?? 0,
+    openTickets: ward.open_tickets ?? 0,
+    resolvedTickets: ward.resolved_tickets ?? 0,
     aiBrief: ward.ai_brief ?? null,
   };
 }
