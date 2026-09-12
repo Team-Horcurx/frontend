@@ -7,7 +7,7 @@ import { computeStats, ALL_WARDS_STATS } from './data/stats.js';
 // Mutable copy so verify actions persist across the session
 let properties = PROPERTIES.map(p => ({ ...p }));
 
-const BASE = 'http://localhost:5173';
+const BASE = '';
 
 const CHAT_RESPONSES = [
   'Based on current GVMC detection data, **Ward 4 (Asilmetta)** has the highest concentration of unverified new builds — 6 properties pending with a combined area of 2,371 m².',
@@ -171,5 +171,87 @@ export const handlers = [
   http.post(`${BASE}/api/admin/refresh`, async () => {
     await delay(500);
     return HttpResponse.json({ triggered: true });
+  }),
+
+  // sourcesSlice.fetchSources
+  http.get(`${BASE}/api/sources`, async ({ request }) => {
+    const url    = new URL(request.url);
+    const wardId = url.searchParams.get('ward_id') ?? '1';
+    const typeFilter = url.searchParams.get('type');
+    await delay(300);
+    const ALL_SOURCES = [
+      { id: 'src-001', type: 'cadastral',     ward_id: wardId, s3_key: 'sources/cadastral/001.geojson',     filename: 'cadastral_seethammadhara_2026.geojson', crs: 'EPSG:4326', status: 'ready',       captured_at: '2026-08-01T00:00:00Z', created_at: '2026-08-01T10:00:00Z', metadata: {} },
+      { id: 'src-002', type: 'revenue',        ward_id: wardId, s3_key: 'sources/revenue/002.pdf',           filename: 'pahani_seethammadhara_2026.pdf',         crs: null,         status: 'pending_ocr', captured_at: '2026-08-03T00:00:00Z', created_at: '2026-08-03T09:00:00Z', metadata: {} },
+      { id: 'src-003', type: 'municipal_gis',  ward_id: wardId, s3_key: 'sources/municipal_gis/003.geojson', filename: 'gvmc_gis_ward1_master.geojson',          crs: 'EPSG:4326', status: 'ready',       captured_at: '2026-07-28T00:00:00Z', created_at: '2026-07-28T11:00:00Z', metadata: {} },
+      { id: 'src-004', type: 'drone_imagery',  ward_id: wardId, s3_key: 'sources/drone_imagery/004.tiff',    filename: 'drone_ortho_sector3_aug2026.tiff',       crs: 'EPSG:32644', status: 'ready',       captured_at: '2026-08-15T06:30:00Z', created_at: '2026-08-15T14:00:00Z', metadata: {} },
+      { id: 'src-005', type: 'ground_truth',   ward_id: wardId, s3_key: 'sources/ground_truth/005.geojson',  filename: 'field_survey_gps_aug2026.geojson',       crs: 'EPSG:4326', status: 'ready',       captured_at: '2026-08-20T00:00:00Z', created_at: '2026-08-20T16:00:00Z', metadata: {} },
+      { id: 'src-006', type: 'building_footprint', ward_id: wardId, s3_key: 'sources/building_footprint/006.geojson', filename: 'osm_building_footprints_vizag.geojson', crs: 'EPSG:4326', status: 'ready', captured_at: '2026-08-05T00:00:00Z', created_at: '2026-08-05T08:00:00Z', metadata: {} },
+      { id: 'src-007', type: 'utility',        ward_id: wardId, s3_key: 'sources/utility/007.geojson',       filename: 'electricity_connections_ward1.geojson',  crs: 'EPSG:4326', status: 'ready',       captured_at: '2026-07-15T00:00:00Z', created_at: '2026-07-15T12:00:00Z', metadata: {} },
+      { id: 'src-008', type: 'revenue',        ward_id: wardId, s3_key: 'sources/revenue/008.pdf',           filename: 'adangal_register_2025-26.pdf',           crs: null,         status: 'ready',       captured_at: '2026-06-30T00:00:00Z', created_at: '2026-06-30T10:00:00Z', metadata: { ocr_extracted: { khata_no: { value: 'KH/445/2024', confidence: 0.97 }, owner_name: { value: 'Venkata Rao', confidence: 0.94 }, area: { value: '312 sq.m', confidence: 0.91 } } } },
+    ];
+    const filtered = typeFilter ? ALL_SOURCES.filter(s => s.type === typeFilter) : ALL_SOURCES;
+    return HttpResponse.json({ sources: filtered });
+  }),
+
+  // sourcesSlice.uploadSource
+  http.post(`${BASE}/api/sources/upload`, async ({ request }) => {
+    const body = await request.json();
+    await delay(900);
+    const ext = (body.filename ?? 'upload.bin').split('.').pop().toLowerCase();
+    const needsOcr = ['revenue','cadastral'].includes(body.type) && ['pdf','jpg','jpeg','png','tiff','tif'].includes(ext);
+    return HttpResponse.json({
+      id: `src-${Date.now()}`,
+      status: needsOcr ? 'pending_ocr' : 'ready',
+      s3_key: `sources/${body.type ?? 'unknown'}/mock-${Date.now()}.${ext}`,
+      message: needsOcr ? 'Queued for OCR digitization' : 'Uploaded and processed',
+    }, { status: 201 });
+  }),
+
+  // harmonizationSlice.fetchMatches
+  http.get(`${BASE}/api/harmonization/matches`, async ({ request }) => {
+    const minScore = parseFloat(new URL(request.url).searchParams.get('min_score') ?? '0');
+    await delay(350);
+    const ALL_MATCHES = [
+      { id: 'match-001', source_a_id: 'src-001', source_a_type: 'cadastral',        source_b_id: 'src-003', source_b_type: 'municipal_gis',     geometry_iou: 0.91, centroid_distance_m: 2.3,  match_score: 96.1, matched_at: '2026-09-01T10:00:00Z' },
+      { id: 'match-002', source_a_id: 'src-001', source_a_type: 'cadastral',        source_b_id: 'src-006', source_b_type: 'building_footprint', geometry_iou: 0.84, centroid_distance_m: 5.1,  match_score: 88.2, matched_at: '2026-09-01T10:00:00Z' },
+      { id: 'match-003', source_a_id: 'src-003', source_a_type: 'municipal_gis',    source_b_id: 'src-005', source_b_type: 'ground_truth',       geometry_iou: 0.78, centroid_distance_m: 8.7,  match_score: 82.6, matched_at: '2026-09-01T10:00:00Z' },
+      { id: 'match-004', source_a_id: 'src-001', source_a_type: 'cadastral',        source_b_id: 'src-008', source_b_type: 'revenue',            geometry_iou: 0.53, centroid_distance_m: 14.2, match_score: 63.4, matched_at: '2026-09-01T10:00:00Z' },
+      { id: 'match-005', source_a_id: 'src-004', source_a_type: 'drone_imagery',    source_b_id: 'src-006', source_b_type: 'building_footprint', geometry_iou: 0.39, centroid_distance_m: 19.8, match_score: 47.0, matched_at: '2026-09-01T10:00:00Z' },
+      { id: 'match-006', source_a_id: 'src-003', source_a_type: 'municipal_gis',    source_b_id: 'src-007', source_b_type: 'utility',            geometry_iou: 0.31, centroid_distance_m: 22.5, match_score: 35.8, matched_at: '2026-09-01T10:00:00Z' },
+    ];
+    return HttpResponse.json({ matches: ALL_MATCHES.filter(m => m.match_score >= minScore) });
+  }),
+
+  // harmonizationSlice.runMatching
+  http.post(`${BASE}/api/harmonization/run`, async () => {
+    await delay(1400);
+    return HttpResponse.json({ sources_evaluated: 8, matches_created: 6, conflicts_created: 3 });
+  }),
+
+  // conflictsSlice.fetchConflicts
+  let conflicts = [
+    { id: 'conf-001', ward_id: '1', match_id: 'match-004', conflict_type: 'geometry_mismatch', severity: 'high',     suggested_resolution: 'Review cadastral parcel KH/445/2024 against revenue pahani — boundary shifted ~14m NW after 2024 resurvey.', status: 'pending',  resolved_by: null, resolved_at: null },
+    { id: 'conf-002', ward_id: '1', match_id: 'match-005', conflict_type: 'attribute_mismatch', severity: 'medium',   suggested_resolution: 'Drone ortho shows 2-storey structure; building_footprint layer records single floor. Update floor count in GVMC DB.', status: 'pending',  resolved_by: null, resolved_at: null },
+    { id: 'conf-003', ward_id: '1', match_id: 'match-006', conflict_type: 'geometry_mismatch', severity: 'critical',  suggested_resolution: 'Utility connection (EB meter) at coordinates 17.733, 83.297 — no matching parcel in municipal GIS. Possible unauthorised structure.', status: 'needs_review', resolved_by: null, resolved_at: null },
+  ];
+
+  http.get(`${BASE}/api/conflicts`, async ({ request }) => {
+    const statusFilter = new URL(request.url).searchParams.get('status');
+    await delay(280);
+    const result = statusFilter ? conflicts.filter(c => c.status === statusFilter) : conflicts;
+    return HttpResponse.json({ conflicts: result });
+  }),
+
+  // conflictsSlice.resolveConflict
+  http.post(`${BASE}/api/conflicts/:id/resolve`, async ({ params, request }) => {
+    const body = await request.json();
+    await delay(300);
+    const idx = conflicts.findIndex(c => c.id === params.id);
+    if (idx !== -1) {
+      conflicts[idx].status      = body.status;
+      conflicts[idx].resolved_by = body.resolved_by ?? 'officer';
+      conflicts[idx].resolved_at = new Date().toISOString();
+    }
+    return HttpResponse.json({ id: params.id, status: body.status });
   }),
 ];

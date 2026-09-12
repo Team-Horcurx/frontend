@@ -7,6 +7,9 @@ import chatReducer from './slices/chatSlice.js';
 import alertsReducer from './slices/alertsSlice.js';
 import assessmentsReducer from './slices/assessmentsSlice.js';
 import ticketsReducer from './slices/ticketsSlice.js';
+import sourcesReducer from './slices/sourcesSlice.js';
+import harmonizationReducer from './slices/harmonizationSlice.js';
+import conflictsReducer from './slices/conflictsSlice.js';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +21,9 @@ const store = configureStore({
     alerts: alertsReducer,
     assessments: assessmentsReducer,
     tickets: ticketsReducer,
+    sources: sourcesReducer,
+    harmonization: harmonizationReducer,
+    conflicts: conflictsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { path: '/officer',      label: 'Field Officer' },
   { path: '/supervisor',   label: 'Supervisor' },
   { path: '/commissioner', label: 'Commissioner' },
+  { path: '/integration',  label: 'Integration' },
   { path: '/admin',        label: 'Admin' },
 ];
 

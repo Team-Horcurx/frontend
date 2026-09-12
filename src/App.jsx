@@ -11,6 +11,7 @@ import FieldOfficerView from './views/FieldOfficerView.jsx';
 import SupervisorView from './views/SupervisorView.jsx';
 import CommissionerView from './views/CommissionerView.jsx';
 import AdminPanel from './views/AdminPanel.jsx';
+import IntegrationView from './views/IntegrationView.jsx';
 import { fetchAdminConfig, selectConfigStatus } from './Redux/slices/adminSlice.js';
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/supervisor" element={<SupervisorView />} />
           <Route path="/commissioner" element={<CommissionerView />} />
           <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/integration" element={<IntegrationView />} />
         </Routes>
       </div>
     </GoogleMapsProvider>

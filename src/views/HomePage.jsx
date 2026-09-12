@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiMapPin, FiUsers, FiBarChart2, FiSettings, FiArrowRight } from 'react-icons/fi';
+import { FiMapPin, FiUsers, FiBarChart2, FiSettings, FiArrowRight, FiLayers } from 'react-icons/fi';
 import PageMotion from '../components/PageMotion.jsx';
 import './HomePage.css';
 
@@ -9,7 +9,7 @@ const ROLES = [
     path: '/officer',
     icon: FiMapPin,
     title: 'Field Officer',
-    description: 'Verify flagged properties on the map, review satellite evidence, and update verification status.',
+    description: 'Verify unverified parcels on the map, review satellite evidence, and update land record status.',
     accent: 'var(--color-primary)',
   },
   {
@@ -23,8 +23,15 @@ const ROLES = [
     path: '/commissioner',
     icon: FiBarChart2,
     title: 'Commissioner',
-    description: 'City-wide heatmap, top unassessed wards, revenue estimates, and AI daily brief.',
+    description: 'City-wide heatmap, top unverified wards, compliance estimates, and AI daily brief.',
     accent: 'var(--color-warning)',
+  },
+  {
+    path: '/integration',
+    icon: FiLayers,
+    title: 'Integration',
+    description: 'Ingest multi-source geospatial data, run spatial matching, and resolve harmonization conflicts.',
+    accent: 'var(--color-info)',
   },
   {
     path: '/admin',
@@ -41,8 +48,8 @@ export default function HomePage() {
   return (
     <PageMotion className="home-page">
       <div className="home-page__hero">
-        <span className="view-kicker">GVMC · Change-Detection Engine</span>
-        <h1 className="home-page__title">Satellite intelligence for Visakhapatnam's 98 wards</h1>
+        <span className="view-kicker">GVMC · PS 26013 NAKSHA</span>
+        <h1 className="home-page__title">Multi-source geospatial harmonization for Visakhapatnam's 98 wards</h1>
         <p className="home-page__subtitle">Select a workspace to continue</p>
       </div>
 
