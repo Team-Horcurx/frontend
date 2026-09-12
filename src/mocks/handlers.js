@@ -4,8 +4,14 @@ import { PROPERTIES } from './data/properties.js';
 import { ALERTS } from './data/alerts.js';
 import { computeStats, ALL_WARDS_STATS } from './data/stats.js';
 
-// Mutable copy so verify actions persist across the session
+// Mutable copies so verify/resolve actions persist across the session
 let properties = PROPERTIES.map(p => ({ ...p }));
+
+let conflicts = [
+  { id: 'conf-001', ward_id: '1', match_id: 'match-004', conflict_type: 'geometry_mismatch',  severity: 'high',     suggested_resolution: 'Review cadastral parcel KH/445/2024 against revenue pahani — boundary shifted ~14m NW after 2024 resurvey.',                                                              status: 'pending',      resolved_by: null, resolved_at: null },
+  { id: 'conf-002', ward_id: '1', match_id: 'match-005', conflict_type: 'attribute_mismatch', severity: 'medium',   suggested_resolution: 'Drone ortho shows 2-storey structure; building_footprint layer records single floor. Update floor count in GVMC DB.',                                                   status: 'pending',      resolved_by: null, resolved_at: null },
+  { id: 'conf-003', ward_id: '1', match_id: 'match-006', conflict_type: 'geometry_mismatch',  severity: 'critical', suggested_resolution: 'Utility connection (EB meter) at coordinates 17.733, 83.297 — no matching parcel in municipal GIS. Possible unauthorised structure.', status: 'needs_review', resolved_by: null, resolved_at: null },
+];
 
 const BASE = '';
 
@@ -229,12 +235,6 @@ export const handlers = [
   }),
 
   // conflictsSlice.fetchConflicts
-  let conflicts = [
-    { id: 'conf-001', ward_id: '1', match_id: 'match-004', conflict_type: 'geometry_mismatch', severity: 'high',     suggested_resolution: 'Review cadastral parcel KH/445/2024 against revenue pahani — boundary shifted ~14m NW after 2024 resurvey.', status: 'pending',  resolved_by: null, resolved_at: null },
-    { id: 'conf-002', ward_id: '1', match_id: 'match-005', conflict_type: 'attribute_mismatch', severity: 'medium',   suggested_resolution: 'Drone ortho shows 2-storey structure; building_footprint layer records single floor. Update floor count in GVMC DB.', status: 'pending',  resolved_by: null, resolved_at: null },
-    { id: 'conf-003', ward_id: '1', match_id: 'match-006', conflict_type: 'geometry_mismatch', severity: 'critical',  suggested_resolution: 'Utility connection (EB meter) at coordinates 17.733, 83.297 — no matching parcel in municipal GIS. Possible unauthorised structure.', status: 'needs_review', resolved_by: null, resolved_at: null },
-  ];
-
   http.get(`${BASE}/api/conflicts`, async ({ request }) => {
     const statusFilter = new URL(request.url).searchParams.get('status');
     await delay(280);
